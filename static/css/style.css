@@ -129,8 +129,15 @@ table {
     border-spacing: 0;
 }
 
-
-
+.manrope-text {
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    margin-left: 10%;
+    color: #ffffff;
+    margin-top: 20px;
+    align-self: flex-start;
+}
 
 body,
 html {
@@ -141,7 +148,6 @@ html {
     overflow-x: hidden;
 }
 
-/* Background slideshow */
 body::before {
     content: "";
     position: fixed;
@@ -156,7 +162,6 @@ body::before {
     transition: background-image 0.5s ease-in-out;
 }
 
-/* Slideshow animation */
 @keyframes bgSlide {
     0% {
         background-image: url('../images/bg1.jpg');
@@ -175,30 +180,31 @@ body::before {
     }
 }
 
-/* Sticky navbar */
-.navbar {
-    position: sticky;
+header {
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
+    z-index: 1000;
+}
+
+.navbar {
     height: 100px;
     background-color: rgba(29, 29, 29, 0.8);
     display: flex;
     align-items: center;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
-
     justify-content: space-between;
     padding: 0 40px;
-    z-index: 1000;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
 }
 
-/* Logo + Title */
 .header-left {
     display: flex;
     align-items: center;
 }
 
 .header-txt {
-    font-size: 2em;
+    font-size: 1.2em;
     color: white;
     text-decoration: none;
     margin-right: 20px;
@@ -209,7 +215,6 @@ body::before {
     height: 80px;
 }
 
-/* Navigation menu */
 ul {
     display: flex;
     gap: 20px;
@@ -234,7 +239,6 @@ li a:hover {
     display: flex;
     gap: 10px;
     background-color: rgba(255, 255, 255, 0.15);
-    /* semi-transparent background */
     padding: 8px 16px;
     border-radius: 10px;
     margin-left: 150px;
@@ -253,4 +257,228 @@ li a:hover {
 
 .auth-container a:hover {
     background-color: rgba(255, 255, 255, 0.3);
+}
+
+.conteiner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 100%;
+    background-color: #16171d;
+    border-radius: 6px;
+    width: 70%;
+    margin: 150px auto 0 auto;
+    padding: 10px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.group {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    float: right;
+    margin-right: 20px;
+    position: relative;
+    width: 250px;
+}
+
+.input {
+    font-family: "Montserrat", sans-serif;
+    width: 100%;
+    height: 45px;
+    padding-left: 2.5rem;
+    box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+    border: 0;
+    border-radius: 8px;
+    background-color: #16171d;
+    outline: none;
+    color: #bdbecb;
+    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+    cursor: text;
+    z-index: 0;
+}
+
+.input::placeholder {
+    color: #bdbecb;
+}
+
+.input:hover {
+    box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+}
+
+.input:active {
+    transform: scale(0.95);
+}
+
+.input:focus {
+    box-shadow: 0 0 0 2.5px #2f303d;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    fill: #bdbecb;
+    width: 1rem;
+    height: 1rem;
+    pointer-events: none;
+    z-index: 1;
+}
+
+
+.slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.arrow {
+    --size: 30px;
+    --color: #a5a5b0;
+
+    width: var(--size);
+    height: var(--size);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    fill: var(--color);
+    flex-shrink: 0;
+}
+
+.arrow–prev svg {
+    transform: rotate(180deg);
+}
+
+.arrow–prev {
+    margin-right: 10px;
+}
+
+.arrow–next {
+    margin-left: 10px;
+}
+
+.NGContainer {
+    flex: 1;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    height: 300px;
+    background-color: #22263a;
+    border-radius: 3px;
+    padding: 4px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+
+
+.Game1 {
+    display: flex;
+    height: 298px;
+    background-color: #2d3350;
+    width: 33.3%;
+    background-image: url("../images/cover1.jpg");
+    background-size: cover;
+
+}
+
+.Game2 {
+    display: flex;
+    height: 298px;
+    background-color: #2d3350;
+    width: 33.3%;
+    margin-left: 5px;
+    margin-right: 5px;
+    background-image: url("../images/cover2.png");
+    background-size: cover;
+
+
+}
+
+.Game3 {
+    display: flex;
+    height: 298px;
+    background-color: #2d3350;
+    width: 33.3%;
+    background-image: url("../images/cover3.jpg");
+    background-size: cover;
+
+}
+
+.container1 {
+    --color: #a5a5b0;
+    --size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    font-size: var(--size);
+    user-select: none;
+    fill: var(--color);
+}
+
+.container .chevron-right {
+    position: absolute;
+    animation: keyframes-return .5s backwards;
+}
+
+.container input:checked~.chevron-right {
+    animation: keyframes-rotate .5s backwards;
+    transform: rotate(180deg);
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+@keyframes keyframes-rotate {
+    0% {
+        transform: rotate(0deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes keyframes-return {
+    0% {
+        transform: rotate(180deg);
+        opacity: 0;
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.progress-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+    margin: 15px auto 0 auto;
+    padding: 10px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background-color: #666;
+    border-radius: 50%;
+    margin: 0 6px;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #fff;
+    transform: scale(1.3);
 }
