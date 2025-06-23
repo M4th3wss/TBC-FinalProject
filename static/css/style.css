@@ -172,7 +172,7 @@ body::before {
     }
 
     66% {
-        background-image: url('../images/bg3.jpg');
+        background-image: url('../images/bg4.jpg');
     }
 
     100% {
@@ -263,11 +263,11 @@ li a:hover {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height: 100%;
+    height: 1600px;
     background-color: #16171d;
     border-radius: 6px;
     width: 70%;
-    margin: 150px auto 0 auto;
+    margin: 350px auto 0 auto;
     padding: 10px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
 }
@@ -280,6 +280,7 @@ li a:hover {
     margin-right: 20px;
     position: relative;
     width: 250px;
+
 }
 
 .input {
@@ -295,7 +296,7 @@ li a:hover {
     color: #bdbecb;
     transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
     cursor: text;
-    z-index: 0;
+    z-index: 2;
 }
 
 .input::placeholder {
@@ -365,7 +366,19 @@ li a:hover {
     max-width: 800px;
     display: flex;
     align-items: center;
-    height: 300px;
+    height: 370px;
+    background-color: #22263a;
+    border-radius: 3px;
+    padding: 4px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.RGContainer {
+    flex: 1;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    height: 250px;
     background-color: #22263a;
     border-radius: 3px;
     padding: 4px;
@@ -374,37 +387,38 @@ li a:hover {
 
 
 
-.Game1 {
-    display: flex;
-    height: 298px;
-    background-color: #2d3350;
-    width: 33.3%;
-    background-image: url("../images/cover1.jpg");
+.game-card {
+    width: 300px;
+    height: 367px;
     background-size: cover;
-
+    background-position: center;
+    margin: 3px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-.Game2 {
-    display: flex;
-    height: 298px;
-    background-color: #2d3350;
-    width: 33.3%;
-    margin-left: 5px;
-    margin-right: 5px;
-    background-image: url("../images/cover2.png");
-    background-size: cover;
-
-
+.game-card:hover {
+    transform: scale(1.02);
 }
 
-.Game3 {
-    display: flex;
-    height: 298px;
-    background-color: #2d3350;
-    width: 33.3%;
-    background-image: url("../images/cover3.jpg");
-    background-size: cover;
+.game-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #22263a;
+    color: white;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    text-align: center;
+    line-height: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
 
+.game-card:hover .game-title {
+    opacity: 1;
 }
 
 .container1 {
@@ -481,4 +495,55 @@ li a:hover {
 .dot.active {
     background-color: #fff;
     transform: scale(1.3);
+}
+
+.genre-container {
+    flex: 1;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    height: 156px;
+    border-radius: 3px;
+    padding: 4px;
+}
+
+.genre {
+    width: 155px;
+    height: 155px;
+    margin: 0 20px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+
+    background-size: cover;
+    background-position: center;
+
+    transform: scale(1);
+    transition: all 0.3s ease;
+    filter: brightness(0.4);
+}
+
+.genre:hover {
+    transform: scale(1.1);
+    filter: brightness(1);
+    z-index: 2;
+}
+
+.genre-title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    color: white;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 6px 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.genre:hover .genre-title {
+    opacity: 1;
 }
