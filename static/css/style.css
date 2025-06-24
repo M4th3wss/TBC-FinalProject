@@ -139,13 +139,21 @@ table {
     align-self: flex-start;
 }
 
+.noto-sans-georgian-text {
+    font-family: "Noto Sans Georgian", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
 body,
 html {
     height: 100%;
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    overflow-x: hidden;
 }
 
 body::before {
@@ -213,6 +221,7 @@ header {
 .logo-img {
     width: 80px;
     height: 80px;
+    padding-right: 30px;
 }
 
 ul {
@@ -225,8 +234,10 @@ ul {
 li a {
     text-decoration: none;
     color: white;
-    font-size: 18px;
-    padding: 8px 16px;
+    font-size: 16px;
+    font-family: "Noto Sans Georgian", sans-serif;
+    padding: 8px 8px;
+    margin-left: 10px;
     border-radius: 8px;
     transition: background 0.3s;
 }
@@ -249,7 +260,9 @@ li a:hover {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
+    font-family: "Noto Sans Georgian", sans-serif;
+
     padding: 8px 12px;
     border-radius: 6px;
     transition: background 0.3s;
@@ -272,59 +285,126 @@ li a:hover {
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
 }
 
-.group {
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    float: right;
-    margin-right: 20px;
-    position: relative;
-    width: 250px;
+/* From Uiverse.io by Li-Deheng */
+.search {
+    --input-line: #cccccc;
+    --input-text-color: #808080;
+    --input-text-hover-color: transparent;
+    --input-border-color: #808080;
+    --input-border-hover-color: #999999;
+    --input-bg-color: #22263a;
+    ;
+    --search-max-width: 250px;
+    --search-min-width: 150px;
+    --border-radius: 5px;
+    --transition-cubic-bezier: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.search-box {
+    max-width: var(--search-max-width);
+    min-width: var(--search-min-width);
+    height: 35px;
+    border: 1px solid var(--input-border-color);
+    border-radius: var(--border-radius);
+    padding: 5px 15px;
+    background: var(--input-bg-color);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: var(--transition-cubic-bezier);
+}
+
+.search-box:hover {
+    border-color: var(--input-border-hover-color);
+}
+
+/*Section input*/
+.search-field {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: -5px;
+    border: 0;
 }
 
 .input {
-    font-family: "Montserrat", sans-serif;
-    width: 100%;
-    height: 45px;
-    padding-left: 2.5rem;
-    box-shadow: 0 0 0 1.5px #2b2c37, 0 0 25px -17px #000;
+    width: calc(100% - 29px);
+    height: 100%;
     border: 0;
-    border-radius: 8px;
-    background-color: #16171d;
+    border-color: transparent;
+    font-size: 1rem;
+    padding-right: 0px;
+    color: var(--input-line);
+    background: var(--input-bg-color);
+    border-right: 2px solid var(--input-border-color);
     outline: none;
-    color: #bdbecb;
-    transition: all 0.25s cubic-bezier(0.19, 1, 0.22, 1);
-    cursor: text;
-    z-index: 2;
 }
 
-.input::placeholder {
-    color: #bdbecb;
+.input::-webkit-input-placeholder {
+    color: var(--input-text-color);
 }
 
-.input:hover {
-    box-shadow: 0 0 0 2.5px #2f303d, 0px 0px 25px -15px #000;
+.input::-moz-input-placeholder {
+    color: var(--input-text-color);
 }
 
-.input:active {
-    transform: scale(0.95);
+.input::-ms-input-placeholder {
+    color: var(--input-text-color);
 }
 
-.input:focus {
-    box-shadow: 0 0 0 2.5px #2f303d;
+.input:focus::-webkit-input-placeholder {
+    color: var(--input-text-hover-color);
+}
+
+.input:focus::-moz-input-placeholder {
+    color: var(--input-text-hover-color);
+}
+
+.input:focus::-ms-input-placeholder {
+    color: var(--input-text-hover-color);
+}
+
+/*Search button*/
+.search-box-icon {
+    width: 52px;
+    height: 35px;
+
+    position: absolute;
+    top: -6px;
+    right: -21px;
+    background: transparent;
+    border-bottom-right-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    transition: var(--transition-cubic-bezier);
+}
+
+.search-box-icon:hover {
+    background: var(--input-border-color);
+}
+
+.btn-icon-content {
+    width: 52px;
+    height: 35px;
+    top: -6px;
+    right: -21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-bottom-right-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    transition: var(--transition-cubic-bezier);
+    opacity: .4;
+}
+
+.btn-icon-content:hover {
+    opacity: .8;
 }
 
 .search-icon {
+    width: 21px;
+    height: 21px;
     position: absolute;
-    left: 1rem;
-    fill: #bdbecb;
-    width: 1rem;
-    height: 1rem;
-    pointer-events: none;
-    z-index: 1;
+    top: 7px;
+    right: 15px;
 }
-
 
 .slider {
     display: flex;
@@ -503,7 +583,8 @@ li a:hover {
     display: flex;
     align-items: center;
     height: 156px;
-    border-radius: 3px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+
     padding: 4px;
 }
 
@@ -546,4 +627,172 @@ li a:hover {
 
 .genre:hover .genre-title {
     opacity: 1;
+}
+
+
+.site-footer {
+    background-color: #16171d;
+    color: #aaa;
+    padding: 15px 20px;
+    margin-top: 50px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+    font-family: "Manrope", sans-serif;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.footer-logo {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.footer-text {
+    margin: 0;
+}
+
+
+/*Categorieshtml*/
+.categories-text {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    font-family: "Manrope", sans-serif;
+    font-size: 30px;
+    margin-top: 30px;
+    font-weight: 400;
+    color: white;
+}
+
+
+.card-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    width: 100%;
+}
+
+.card {
+    width: 100%;
+    max-width: 800px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    padding: 4px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.card p {
+    position: relative;
+    /* Needed for ::before to work correctly */
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.5s;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #b4b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card p:hover {
+    flex: 4;
+}
+
+.card p::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(11, 14, 32, 0.6);
+    /* this was missing */
+    z-index: 1;
+    pointer-events: none;
+    /* ensures clicks go through */
+}
+
+.card p span {
+    position: relative;
+    z-index: 2;
+    min-width: 14em;
+    padding: 0.5em;
+    font-family: "Manrope", sans-serif;
+
+    text-align: center;
+    transform: rotate(-90deg);
+    transition: all 0.5s;
+    text-transform: uppercase;
+    color: #d3c1c1;
+    letter-spacing: 0.1em;
+}
+
+.card p:hover span {
+    transform: rotate(0);
+}
+
+/* Background images per card */
+.card p:nth-child(1) {
+    background-image: url('../images/skyrim.png');
+}
+
+.card p:nth-child(2) {
+    background-image: url('../images/shooters.jpg');
+    /* Fix this */
+}
+
+.card p:nth-child(3) {
+    background-image: url('../images/horrorseries.png');
+}
+
+.card p:nth-child(4) {
+    background-image: url('../images/actiongames.jpg');
+}
+
+.card p:nth-child(5) {
+    background-image: url('../images/racingserie.jpg');
+}
+
+.card p:nth-child(6) {
+    background-image: url('../images/strategygames.jpg');
+}
+
+.card2 p:nth-child(1) {
+    background-image: url('../images/metroidvania.jpg');
+}
+
+.card2 p:nth-child(2) {
+    background-image: url('../images/sportsseries.jpg');
+}
+
+.card2 p:nth-child(3) {
+    background-image: url('../images/rogue-like.jpg');
+}
+
+.card2 p:nth-child(4) {
+    background-image: url('../images/simulation.jpg');
+}
+
+.card2 p:nth-child(5) {
+    background-image: url('../images/scifi.jpg');
+}
+
+.card2 p:nth-child(6) {
+    background-image: url('../images/casual.jpg');
 }

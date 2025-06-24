@@ -31,5 +31,10 @@ def home():
     return render_template("index.html", new_games=games_new, recommended_games=games_recommended, genre_type=genres)
 
 
+@app.route("/category")
+def category():
+    return render_template("categories.html")
+
+
 if __name__ == '__main__':
     app.run(debug=True)

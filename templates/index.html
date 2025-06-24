@@ -2,178 +2,184 @@
 
 {% block content %}
 
-<div class="conteiner">
-    <div class="group">
-        <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon">
-            <g>
-                <path
-                    d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                </path>
-            </g>
+<div class="search">
+    <div class="search-box">
+        <div class="search-field">
+            <input placeholder="Search..." class="input" type="text">
+            <div class="search-box-icon">
+                <button class="btn-icon-content">
+                    <i class="search-icon">
+                        <svg xmlns="://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
+                            <path
+                                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                                fill="#fff"></path>
+                        </svg>
+                    </i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="new-added-label manrope-text">
+    New Added
+</div>
+
+<!-- …inside your .conteiner -->
+<div class="slider">
+    <!-- left arrow -->
+    <label class="arrow arrow–prev">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+           0 45.3l-192 192c-12.5 12.5-32.8
+           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
+           256 73.4 86.6c-12.5-12.5-12.5-32.8 
+           0-45.3s32.8-12.5 45.3 0l192 192z">
+            </path>
         </svg>
+    </label>
 
-        <input id="query" class="input" type="search" placeholder="Search..." name="searchbar" />
+    <div class="NGContainer">
+        {% for game in new_games %}
+        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
+            <div class="game-title">{{ game.title }}</div>
+
+
+        </div>
+        {% endfor %}
     </div>
 
 
-    <div class="new-added-label manrope-text">
-        New Added
-    </div>
-
-    <!-- …inside your .conteiner -->
-    <div class="slider">
-        <!-- left arrow -->
-        <label class="arrow arrow–prev">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+    <!-- right arrow -->
+    <label class="arrow arrow–next">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
            12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
            256 73.4 86.6c-12.5-12.5-12.5-32.8 
            0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
-
-        <div class="NGContainer">
-            {% for game in new_games %}
-            <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
-                <div class="game-title">{{ game.title }}</div>
+            </path>
+        </svg>
+    </label>
 
 
+
+
+</div>
+<div class="progress-bar">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+
+    <span class="dot"></span>
+
+</div>
+
+
+<div style="margin-top: 50px;" class="new-added-label manrope-text">
+    Recommended
+</div>
+
+
+<div class="slider">
+    <!-- left arrow -->
+    <label class="arrow arrow–prev">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+           0 45.3l-192 192c-12.5 12.5-32.8
+           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
+           256 73.4 86.6c-12.5-12.5-12.5-32.8 
+           0-45.3s32.8-12.5 45.3 0l192 192z">
+            </path>
+        </svg>
+    </label>
+
+    <!-- your center container -->
+    <div class="NGContainer">
+        {% for game in recommended_games %}
+        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
+            <div class="game-title">{{ game.title }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- right arrow -->
+    <label class="arrow arrow–next">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+           0 45.3l-192 192c-12.5 12.5-32.8
+           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
+           256 73.4 86.6c-12.5-12.5-12.5-32.8 
+           0-45.3s32.8-12.5 45.3 0l192 192z">
+            </path>
+        </svg>
+    </label>
+
+
+</div>
+<div class="progress-bar">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+
+
+</div>
+
+
+<div style="margin-top: 50px;" class="new-added-label manrope-text">
+    Browse by Category
+</div>
+
+<div class="slider">
+    <!-- left arrow -->
+    <label class="arrow arrow–prev">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+           0 45.3l-192 192c-12.5 12.5-32.8
+           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
+           256 73.4 86.6c-12.5-12.5-12.5-32.8 
+           0-45.3s32.8-12.5 45.3 0l192 192z">
+            </path>
+        </svg>
+    </label>
+
+
+
+    <div class="genre-container">
+        {% for genre in genre_type[:4] %}
+        <div>
+            <div class="genre" style="background-image: url('{{ url_for('static', filename=genre.image) }}');">
+                <div class="genre-title">{{ genre.title }}</div>
             </div>
-            {% endfor %}
         </div>
 
-
-        <!-- right arrow -->
-        <label class="arrow arrow–next">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
+        {% endfor %}
+    </div>
+    <!-- right arrow -->
+    <label class="arrow arrow–next">
+        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
+            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
            12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
            256 73.4 86.6c-12.5-12.5-12.5-32.8 
            0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
+            </path>
+        </svg>
+    </label>
+</div>
+
+<div class="progress-bar">
+
+    <span class="dot"></span>
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
 
 
 
-
-    </div>
-    <div class="progress-bar">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-
-        <span class="dot"></span>
-
-    </div>
-
-
-    <div style="margin-top: 50px;" class="new-added-label manrope-text">
-        Recommended
-    </div>
-
-
-    <div class="slider">
-        <!-- left arrow -->
-        <label class="arrow arrow–prev">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
-
-        <!-- your center container -->
-        <div class="NGContainer">
-            {% for game in recommended_games %}
-            <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
-                <div class="game-title">{{ game.title }}</div>
-            </div>
-            {% endfor %}
-        </div>
-
-        <!-- right arrow -->
-        <label class="arrow arrow–next">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
-
-
-    </div>
-    <div class="progress-bar">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-
-
-    </div>
-
-
-    <div style="margin-top: 50px;" class="new-added-label manrope-text">
-        Browse by Category
-    </div>
-
-    <div class="slider">
-        <!-- left arrow -->
-        <label class="arrow arrow–prev">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
-
-
-
-        <div class="genre-container">
-            {% for genre in genre_type[:4] %}
-            <div>
-                <div class="genre" style="background-image: url('{{ url_for('static', filename=genre.image) }}');">
-                    <div class="genre-title">{{ genre.title }}</div>
-                </div>
-            </div>
-
-            {% endfor %}
-        </div>
-        <!-- right arrow -->
-        <label class="arrow arrow–next">
-            <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-                <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-                </path>
-            </svg>
-        </label>
-    </div>
-
-    <div class="progress-bar">
-
-        <span class="dot"></span>
-        <span class="dot active"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-
-
-
-    </div>
+</div>
 
 
 

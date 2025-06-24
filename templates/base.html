@@ -9,6 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Noto+Sans+Georgian:wght@100..900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -16,15 +21,16 @@
         <div class="navbar">
             <div class="header-left">
                 <div class="new-added-label manrope-text">
-                    <a class="header-txt" href="">MGames.net</a>
+                    <a class="header-txt" href="/">MGames.net</a>
                 </div>
                 <img src="../static/images/retroicon.png" class="logo-img" alt="">
             </div>
 
             <ul>
-                <li><a href="#">კატეგორიები</a></li>
+                <li><a href="/category">კატეგორიები</a></li>
                 <li><a href="#">მოთხოვნა</a></li>
                 <li><a href="#">კონტაქტი</a></li>
+                <li><a href="#">მხარდაჭერა</a></li>
             </ul>
 
             <div class="auth-container">
@@ -35,9 +41,20 @@
     </header>
 
     <div class="container mt-4">
-        {% block content%}
 
-        {% endblock %}
+
+
+        <div class="conteiner">
+
+
+
+            {% block content%}
+
+            {% endblock %}
+        </div>
+
+
+
     </div>
 
 
@@ -47,7 +64,12 @@
 
 
 
-
+    <footer class="site-footer">
+        <div class="footer-content">
+            <img src="../static/images/tbcfooter.png" alt="Logo" class="footer-logo">
+            <p class="footer-text">© 2025 MGames. All rights reserved.</p>
+        </div>
+    </footer>
 
 
 
