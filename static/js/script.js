@@ -1,54 +1,26 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const container = document.querySelector('.game-container');
-    const windows = document.querySelectorAll('.game-window');
-    const leftBtn = document.querySelector('.left-btn');
-    const rightBtn = document.querySelector('.right-btn');
-    const progressBar = document.querySelector('.progress-bar');
-    let scrollPos = 0;
-    const maxScroll = container.scrollWidth - container.clientWidth;
+var btns = document.querySelectorAll('.btn');
+var paginationWrapper = document.querySelector('.pagination-wrapper');
+var bigDotContainer = document.querySelector('.big-dot-container');
+var littleDot = document.querySelector('.little-dot');
 
-    leftBtn.addEventListener('click', () => {
-        scrollPos = Math.max(0, scrollPos - 200);
-        container.scrollLeft = scrollPos;
-        updateProgress();
-    });
+for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', btnClick);
+}
 
-    rightBtn.addEventListener('click', () => {
-        scrollPos = Math.min(maxScroll, scrollPos + 200);
-        container.scrollLeft = scrollPos;
-        updateProgress();
-    });
-
-    windows.forEach(window => {
-        window.addEventListener('mouseover', () => {
-            window.style.transform = 'scale(1.1)';
-            const desc = document.createElement('div');
-            desc.className = 'desc-window';
-            desc.textContent = window.getAttribute('data-desc');
-            window.appendChild(desc);
-        });
-
-        window.addEventListener('mouseout', () => {
-            window.style.transform = 'scale(1)';
-            const desc = window.querySelector('.desc-window');
-            if (desc) desc.remove();
-        });
-    });
-
-    container.addEventListener('scroll', updateProgress);
-    function updateProgress() {
-        const scrollPercentage = (container.scrollLeft / maxScroll) * 100;
-        progressBar.style.width = `${scrollPercentage}%`;
+function btnClick() {
+    if (this.classList.contains('btn--prev')) {
+        paginationWrapper.classList.add('transition-prev');
+    } else {
+        paginationWrapper.classList.add('transition-next');
     }
 
-    windows.forEach(window => {
-        window.addEventListener('mouseover', () => {
-            windows.forEach(w => {
-                if (w !== window) w.style.transform = 'scale(0.9)';
-            });
-        });
-        window.addEventListener('mouseout', () => {
-            windows.forEach(w => w.style.transform = 'scale(1)');
-        });
-    });
-});
+    var timeout = setTimeout(cleanClasses, 500);
+}
+
+function cleanClasses() {
+    if (paginationWrapper.classList.contains('transition-next')) {
+        paginationWrapper.classList.remove('transition-next')
+    } else if (paginationWrapper.classList.contains('transition-prev')) {
+        paginationWrapper.classList.remove('transition-prev')
+    }
+}
