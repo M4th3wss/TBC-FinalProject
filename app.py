@@ -1,6 +1,9 @@
 from flask import Flask, render_template
+from flask_wtf import CSRFProtect
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'replace-with-random-string'
+CSRFProtect(app)
 
 
 @app.route('/')
@@ -34,6 +37,11 @@ def home():
 @app.route("/category")
 def category():
     return render_template("categories.html")
+
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
 
 if __name__ == '__main__':

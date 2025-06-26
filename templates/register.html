@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <form class="form" method="post" action="{{ url_for('register') }}">
+
+        <h1 class="title">რეგისტრაცია</h1>
+        <p class="subtitle">მოდით შევქმნათ თქვენი აქაუნთი</p>
+
+        <div class="input-container ic1">
+            <input class="input" type="text" id="nickname" name="nickname">
+            <div class="cut"></div>
+            <label class="iLabel" for="nickname">Nickname</label>
+        </div>
+
+        <div class="input-container ic2">
+            <input class="input" type="email" id="email" name="email">
+            <div class="cut cut-short"></div>
+            <label class="iLabel" for="email">Email</label>
+        </div>
+
+
+        <button class="submit" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}
