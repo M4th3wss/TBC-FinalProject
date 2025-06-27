@@ -132,7 +132,7 @@
 
 
     <div class="genre-container">
-        {% for genre in genre_type[:4] %}
+        {% for genre in genre_type %}
         <div>
             <div class="genre" style="background-image: url('{{ url_for('static', filename=genre.image) }}');">
                 <div class="genre-title">{{ genre.title }}</div>

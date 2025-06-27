@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}{{ user.username }}{% endblock %}
+
+{# base.html-ში ერთხელ გაქვს ჩასმული
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}"> #}
+
+{% block content %}
+<main class="profile">
+
+    <!-- ────── Banner ────── -->
+    {% if user.banner %}
+    <img class="profile__banner" src="{{ url_for('static', filename='banners/' ~ user.banner) }}" alt="Profile banner">
+    {% else %}
+    <div class="profile__banner profile__banner--placeholder">
+        No banner uploaded
+    </div>
+    {% endif %}
+
+    <!-- ────── Avatar + Name ────── -->
+    <section class="profile__header">
+        <img class="profile__avatar" src="{{ url_for('static', filename='images/profileimg.png') }}" alt="Avatar">
+        <h2 class="profile__name">{{ user.username }}</h2>
+    </section>
+
+    <!-- ────── Games list ────── -->
+    <section class="profile__games">
+        <h3 class="profile__subtitle">ჩემი ჩამოტვირთული თამაშები</h3>
+
+        {% if user.games_list() %}
+        <ul class="profile__gamelist">
+            {% for g in user.games_list() %}
+            <li class="profile__game">{{ g }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="profile__empty">ჯერ არაფერია ჩამოტვირთული.</p>
+        {% endif %}
+    </section>
+
+
+    <a href="{{ url_for('main.logout') }}" class="profile__logout">
+        Logout
+    </a>
+    </section>
+
+</main>
+{% endblock %}

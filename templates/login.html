@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <form class="form" method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="title">შესვლა</div>
+
+        <div class="input-container ic1">
+            {{ form.email(class="input", placeholder=" ") }}
+            <div class="cut"></div>
+            <label class="iLabel" for="{{ form.email.id }}">ემაილი</label>
+        </div>
+
+        <div class="input-container ic1">
+            {{ form.password(class="input", placeholder=" ") }}
+            <div class="cut"></div>
+            <label class="iLabel" for="{{ form.password.id }}">პაროლი</label>
+        </div>
+
+        {{ form.submit(class="submit") }}
+    </form>
+</div>
+{% endblock %}

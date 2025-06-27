@@ -1,0 +1,22 @@
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField, FileField
+from wtforms.validators import DataRequired, Email, EqualTo, Length
+
+
+class RegistrationForm(FlaskForm):
+    username = StringField("Username",
+                           validators=[DataRequired(), Length(3, 30)])
+    email = StringField("Email",
+                        validators=[DataRequired(), Email()])
+    password = PasswordField("Password",
+                             validators=[DataRequired(), Length(6, 64)])
+    confirm = PasswordField("Confirm",
+                            validators=[DataRequired(), EqualTo("password")])
+    banner = FileField("Profile Banner (optional)")
+    submit = SubmitField("Register")
+
+
+class LoginForm(FlaskForm):
+    email = StringField("Email",     validators=[DataRequired(), Email()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Login")
