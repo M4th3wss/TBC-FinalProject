@@ -1225,75 +1225,118 @@ form.form .input {
 
 
 
-/* ───── Base wrapper ───── */
-.profile {
-    --clr-bg: #15172b;
-    --clr-card: #1e2138;
-    --clr-text: #eee;
-    --clr-sub: #ccc;
-    --radius: 12px;
-
-    max-width: 900px;
-    margin: 30px auto;
-    font-family: "Noto Sans Georgian", sans-serif;
-    color: var(--clr-text);
+/* ==========  VARIABLES  ========== */
+:root {
+    --clr-bg: #0e101a;
+    --clr-glass: rgba(255, 255, 255, 0.05);
+    --clr-glass-border: rgba(255, 255, 255, 0.12);
+    --clr-primary: #5ef6d5;
+    --clr-primary-dark: #3dd5b4;
+    --clr-text: #fbfbfe;
+    --clr-sub: #a0a0b7;
+    --radius: 14px;
+    --blur: 18px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ───── Banner ───── */
+body {
+    background: var(--clr-bg);
+    color: var(--clr-text);
+    font-family: "Noto Sans Georgian", sans-serif;
+}
+
+/* ==========  WRAPPER  ========== */
+.profile {
+    max-width: 1550px;
+    margin: 40px auto;
+}
+
+/* ==========  BANNER  ========== */
 .profile__banner {
     width: 100%;
-    max-height: 240px;
+    height: 240px;
     object-fit: cover;
     border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
+}
+
+/* subtle dark-to-transparent overlay */
+.profile__banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(14, 16, 26, 0) 40%,
+            rgba(14, 16, 26, 0.75) 100%);
 }
 
 .profile__banner--placeholder {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #3a3d55;
-    color: var(--clr-sub);
-    height: 240px;
-    border-radius: var(--radius);
+    background: #202334;
     font-size: 18px;
+    color: var(--clr-sub);
 }
 
-/* ───── Header (avatar + name) ───── */
+/* ==========  HEADER (avatar, name, btn)  ========== */
 .profile__header {
-    position: relative;
-    text-align: center;
-    margin-top: -64px;
-    /* lifts avatar over banner */
-    padding-bottom: 25px;
+    display: flex;
+    align-items: flex-end;
+    gap: 22px;
+    transform: translateY(-60px);
+    padding: 0 26px;
 }
 
 .profile__avatar {
     width: 128px;
     height: 128px;
     border-radius: 50%;
-    border: 4px solid var(--clr-bg);
+    border: 5px solid var(--clr-bg);
+    object-fit: cover;
     background: #444;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    transition: var(--transition);
+}
+
+.profile__avatar:hover {
+    transform: scale(1.04);
 }
 
 .profile__name {
-    margin-top: 10px;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin-bottom: 10px;
 }
 
-/* ───── Games section ───── */
+
+.profile__bio {
+    margin-top: 8px;
+    font-size: 15px;
+    color: var(--clr-sub);
+    max-width: 480px;
+    line-height: 1.4;
+}
+
+/* ==========  GAMES LIST  ========== */
 .profile__games {
-    background: var(--clr-card);
+    background: var(--clr-glass);
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--clr-glass-border);
     border-radius: var(--radius);
-    padding: 25px 30px 30px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, .35);
+    padding: 36px 40px 42px;
+    margin-top: -20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
 }
 
 .profile__subtitle {
-    margin: 0 0 15px;
-    font-size: 20px;
-    color: var(--clr-sub);
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0 0 22px;
+    color: var(--clr-primary);
 }
 
 .profile__gamelist {
@@ -1301,22 +1344,33 @@ form.form .input {
     padding: 0;
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
 }
 
 .profile__game {
-    background: #303245;
+    position: relative;
+    background: var(--clr-glass);
+    border: 1px solid var(--clr-glass-border);
     border-radius: var(--radius);
-    padding: 10px 14px;
+    padding: 14px 18px 14px 48px;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    overflow: hidden;
+    transition: var(--transition);
 }
 
 .profile__game::before {
     content: "🎮";
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+.profile__game:hover {
+    border-color: var(--clr-primary);
+    box-shadow: 0 0 12px 2px var(--clr-primary-dark);
 }
 
 .profile__empty {
@@ -1324,19 +1378,96 @@ form.form .input {
     font-style: italic;
 }
 
-/* ───── Logout button ───── */
+/* ==========  LOGOUT BUTTON  ========== */
 .profile__logout {
     display: inline-block;
-    margin-top: 12px;
-    padding: 6px 18px;
-    background: #dc2f55;
-    color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: var(--radius);
+    margin-top: 34px;
+    padding: 10px 28px;
+    background: var(--clr-primary);
+    color: var(--clr-bg);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: calc(var(--radius) - 2px);
     text-decoration: none;
-    transition: background 0.2s ease;
+    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .profile__logout:hover {
-    background: #b72247;
+    background: var(--clr-primary-dark);
+    transform: translateY(-2px);
+}
+
+/* ==========  RESPONSIVE  ========== */
+@media (max-width: 540px) {
+    .profile__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transform: translateY(-70px);
+    }
+
+    .profile__avatar {
+        width: 108px;
+        height: 108px;
+    }
+
+    .profile__name {
+        margin-bottom: 0;
+    }
+
+    .profile__games {
+        padding: 28px 22px 36px;
+    }
+}
+
+.profile__edit-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    background: var(--clr-glass);
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--clr-glass-border);
+    color: var(--clr-text);
+    font-size: 14px;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.profile__edit-btn:hover {
+    background: var(--clr-primary);
+    color: var(--clr-bg);
+}
+
+
+
+.nav-links a {
+    margin-left: 18px;
+    color: #eee;
+    text-decoration: none;
+    font-family: "Noto Sans Georgian", sans-serif;
+    font-weight: 500;
+    transition: opacity .2s;
+}
+
+.nav-links a:hover {
+    opacity: .75;
+}
+
+/* --- Avatar button --- */
+.nav-avatar {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

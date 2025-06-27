@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Edit Profile{% endblock %}
+
+{% block content %}
+<main class="profile">
+    <h2 style="margin-bottom:24px;">პროფილის რედაქტირება</h2>
+
+    <form method="POST" enctype="multipart/form-data" class="profile__games">
+        {{ form.hidden_tag() }}
+
+        <label>სახელი
+            {{ form.username(class="input", style="margin-top:6px; width:100%;") }}
+        </label><br><br>
+
+        <label>Bio (max 250 ჩ)
+            {{ form.bio(class="input", rows="3", style="margin-top:6px; width:100%;") }}
+        </label><br><br>
+
+        <label>Avatar
+            {{ form.avatar() }}
+        </label><br><br>
+
+        <label>Banner
+            {{ form.banner() }}
+        </label><br><br>
+
+        {{ form.submit(class="profile__logout", style="background:var(--clr-primary);") }}
+    </form>
+</main>
+{% endblock %}

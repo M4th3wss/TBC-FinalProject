@@ -1,0 +1,18 @@
+import sqlite3
+
+db_path = "app.db"
+con = sqlite3.connect(db_path)
+cur = con.cursor()
+
+for stmt in (
+    "ALTER TABLE user ADD COLUMN avatar TEXT",
+    "ALTER TABLE user ADD COLUMN bio    TEXT"
+):
+    try:
+        cur.execute(stmt)
+    except sqlite3.OperationalError:
+        pass
+
+con.commit()
+con.close()
+print("Patched DB with avatar and bio columns.")

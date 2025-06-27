@@ -17,10 +17,24 @@
     {% endif %}
 
     <!-- ────── Avatar + Name ────── -->
+
     <section class="profile__header">
+        {# თუ ატვირთულია, აჩვენე; თორემ – default #}
+        {% if user.avatar %}
+        <img class="profile__avatar" src="{{ url_for('static', filename='avatars/' ~ user.avatar) }}" alt="Avatar">
+        {% else %}
         <img class="profile__avatar" src="{{ url_for('static', filename='images/profileimg.png') }}" alt="Avatar">
+        {% endif %}
+
         <h2 class="profile__name">{{ user.username }}</h2>
+
+        {# Bio მხოლოდ მაშინ, თუ რაღაც წერია #}
+        {% if user.bio %}
+        <p class="profile__bio">{{ user.bio }}</p>
+        {% endif %}
     </section>
+
+
 
     <!-- ────── Games list ────── -->
     <section class="profile__games">
@@ -41,6 +55,11 @@
     <a href="{{ url_for('main.logout') }}" class="profile__logout">
         Logout
     </a>
+
+    <a href="{{ url_for('main.edit_profile') }}" class="profile__edit-btn" title="Edit profile">
+        ✎ რედაქტირება
+    </a>
+
     </section>
 
 </main>

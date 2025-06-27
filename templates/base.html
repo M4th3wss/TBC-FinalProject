@@ -26,15 +26,27 @@
             </div>
 
             <ul>
-                <li><a href="/category">კატეგორიები</a></li>
+                <li><a href="/categories">კატეგორიები</a></li>
                 <li><a href="#">მოთხოვნა</a></li>
                 <li><a href="#">კონტაქტი</a></li>
                 <li><a href="#">მხარდაჭერა</a></li>
             </ul>
 
             <div class="auth-container">
-                <a href="/login">შესვლა</a>
-                <a href="/register">რეგისტრაცია</a>
+                <div class="navlinks">
+                    {% if not current_user.is_authenticated%}
+                    <a href="{{ url_for('main.login') }}">შესვლა</a>
+                    <a href="{{ url_for('main.register') }}">რეგისტრაცია</a>
+                    {% else %}
+                    <a href="{{ url_for('main.profile') }}" class="nav-avatar">
+                        {# avatar filename; თუკი მომავალში user.avatar დაამატებ, აქ შეცვლი #}
+                        <img src="{{ url_for('static', filename='images/profileimg.png') }}" alt="Profile"
+                            class="avatar-img">
+                    </a>
+                    {% endif %}
+
+                </div>
+
 
             </div>
         </div>

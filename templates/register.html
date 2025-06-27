@@ -35,18 +35,10 @@
             <label class="iLabel" for="{{ form.password.id }}">პაროლი</label>
         </div>
 
-        {# CONFIRM #}
-        <div class="input-container ic1">
-            {{ form.confirm(class="input", placeholder=" ") }}
-            <div class="cut"></div>
-            <label class="iLabel" for="{{ form.confirm.id }}">დაადასტურე</label>
-        </div>
-        {% if form.confirm.errors %}
-        <small class="error">{{ form.confirm.errors[0] }}</small>
-        {% endif %}
+
 
         {# BANNER UPLOAD () #}
-        <p style="margin-top:20px;">ბანერი (ნებაყოფლობით)</p>
+        <p style="margin-top:20px; color: white;">ბანერი (ნებაყოფლობით)</p>
         {{ form.banner() }}
 
         {{ form.submit(class="submit") }}

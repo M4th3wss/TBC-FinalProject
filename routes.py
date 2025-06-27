@@ -1,3 +1,6 @@
+from forms import RegistrationForm, LoginForm, EditProfileForm
+from models import User
+from ext import db
 import os
 import json
 from flask import Blueprint, render_template, redirect, url_for, flash, request
@@ -5,10 +8,8 @@ from flask_login import (
     login_user, login_required, logout_user, current_user
 )
 from werkzeug.utils import secure_filename
+AVATAR_FOLDER = os.path.join("static", "avatars")
 
-from ext import db
-from models import User
-from forms import RegistrationForm, LoginForm
 
 bp = Blueprint("main", __name__)
 
@@ -28,7 +29,7 @@ def save_banner(storage):
         flash("ფაილის ფორმატი არასწორია (PNG/JPG).", "warning")
         return None
     if storage.content_length and storage.content_length > MAX_MB * 1024 * 1024:
-        flash("ბანერი უნდა იყოს ≤3 MB.", "warning")
+        flash("ბანერი უნდა იყოს 3-ზე ნაკლები MB.", "warning")
         return None
     os.makedirs(UPLOAD_FOLDER, exist_ok=True)
     fname = secure_filename(storage.filename)
@@ -39,7 +40,31 @@ def save_banner(storage):
 # ────────────────────────── PUBLIC PAGES ─────────────────────────
 @bp.route("/")
 def index():
-    return render_template("index.html")
+    games_new = [
+        {"title": "Elder Ring: Nightreign", "image": "images/cover1.jpg"},
+        {"title": "Elder Scrolls IV: Oblivion (remastered)",
+         "image": "images/cover2.png"},
+        {"title": "Schedule I", "image": "images/cover3.jpg"},
+    ]
+    games_recommended = [
+        {"title": "Hollow Knight", "image": "images/cover4normal.png"},
+        {"title": "Deltarune", "image": "images/cover5.png"},
+        {"title": "Outer Wilds", "image": "images/cover6.png"},
+    ]
+    genres = [
+        {"title": "RPG", "image": "images/rpg-game.png"},
+        {"title": "ACTION", "image": "images/action-movie.png"},
+        {"title": "HORROR", "image": "images/horror.png"},
+        {"title": "RACING", "image": "images/racing.png"},
+        {"title": "FPS", "image": "images/fps.png"},
+        {"title": "strategy", "image": "images/strategy.png"},
+    ]
+    return render_template(
+        "index.html",
+        new_games=games_new,
+        recommended_games=games_recommended,
+        genre_type=genres
+    )
 
 
 @bp.route("/categories")
@@ -66,6 +91,8 @@ def register():
         user.set_password(form.password.data)
         user.banner = save_banner(form.banner.data)
         user.games = json.dumps(["Hollow Knight"])
+        user.games = json.dumps(["Elder Ring: Nightreign"])
+
         db.session.add(user)
         db.session.commit()
 
@@ -103,3 +130,46 @@ def logout():
 @login_required
 def profile():
     return render_template("profile.html", user=current_user)
+
+
+@bp.route("/profile/edit", methods=["GET", "POST"])
+@login_required
+def edit_profile():
+    form = EditProfileForm(
+        username=current_user.username,
+        bio=getattr(current_user, "bio", "")
+    )
+    if form.validate_on_submit():
+        # --- username & bio ---
+        current_user.username = form.username.data
+        current_user.bio = form.bio.data
+
+        # --- avatar upload ---
+        if form.avatar.data:
+            fname = save_avatar(form.avatar.data)   # იმავე helper-ს ვიყენებთ
+            if fname:
+                current_user.avatar = fname
+
+        # --- banner upload ---
+        if form.banner.data:
+            fname = save_banner(form.banner.data)
+            if fname:
+                current_user.banner = fname
+
+        db.session.commit()
+        flash("Profile updated ✨", "success")
+        return redirect(url_for(".profile"))
+    return render_template("edit_profile.html", form=form, user=current_user)
+
+
+def save_avatar(storage):
+    if not storage:
+        return None
+    ext_ok = storage.filename.rsplit(".", 1)[1].lower() in {
+        "png", "jpg", "jpeg"}
+    if not ext_ok:
+        return None
+    os.makedirs(AVATAR_FOLDER, exist_ok=True)
+    fname = secure_filename(storage.filename)
+    storage.save(os.path.join(AVATAR_FOLDER, fname))
+    return fname

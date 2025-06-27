@@ -11,6 +11,8 @@ class User(db.Model, UserMixin):
     pwd_hash = db.Column(db.String(128), nullable=False)
     banner = db.Column(db.String(120))
     games = db.Column(db.Text, default=json.dumps([]))
+    avatar = db.Column(db.String(120))
+    bio = db.Column(db.Text)
 
     # helpers
     def set_password(self, pwd):  self.pwd_hash = generate_password_hash(pwd)
