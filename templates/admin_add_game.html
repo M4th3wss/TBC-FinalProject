@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Add Game{% endblock %}
+
+{% block content %}
+<h1 style="margin-bottom:24px;">ახალი თამაშის დამატება</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+
+    <label>სათაური</label><br>
+    {{ form.title(class="input") }}<br><br>
+
+    <label>კატეგორია</label><br>
+    {{ form.category(class="input") }}<br><br>
+
+    <label>ყდაზე სურათი</label><br>
+    {{ form.cover() }}<br><br>
+
+    {{ form.submit(class="profile__logout",
+    style="background:#5ef6d5;color:#15172b;") }}
+</form>
+{% endblock %}

@@ -430,6 +430,7 @@ li a:hover {
     height: auto;
     background-color: #16171d;
     border-radius: 6px;
+    min-height: 800px;
     width: 70%;
     margin: 350px auto 0 auto;
     padding: 10px;
@@ -753,7 +754,8 @@ li a:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 300px;
+    margin-bottom: 110px;
     width: 100%;
 }
 
@@ -773,7 +775,7 @@ li a:hover {
     position: relative;
     /* Needed for ::before to work correctly */
     height: 100%;
-    flex: 1;
+    flex: 2;
     overflow: hidden;
     cursor: pointer;
     border-radius: 2px;
@@ -799,10 +801,8 @@ li a:hover {
     right: 0;
     bottom: 0;
     background: rgba(11, 14, 32, 0.6);
-    /* this was missing */
     z-index: 1;
     pointer-events: none;
-    /* ensures clicks go through */
 }
 
 .card p span {
@@ -874,7 +874,80 @@ li a:hover {
     background-image: url('../images/casual.jpg');
 }
 
+.cat-item {
+    position: relative;
+    height: 100%;
+    flex: 1;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.5s;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: 1px solid #b4b4b4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    /* no underline */
+}
 
+/* keep the flex‑expand animation */
+.cat-item:hover {
+    flex: 3;
+}
+
+/* reuse the dark overlay */
+.cat-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(11, 14, 32, 0.6);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* title */
+.cat-item span {
+    position: relative;
+    z-index: 2;
+    min-width: 14em;
+    padding: 0.5em;
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    transform: rotate(-90deg);
+    transition: all 0.5s;
+    text-transform: uppercase;
+    color: #d3c1c1;
+    letter-spacing: 0.1em;
+}
+
+.cat-item:hover span {
+    transform: rotate(0);
+}
+
+
+.add-game-btn {
+
+    position: fixed;
+    bottom: 32px;
+    left: 32px;
+    padding: 10px 18px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #5ef6d5;
+    color: #0e101a;
+    border-radius: 8px;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
+    transition: background .25s, transform .2s;
+}
+
+.add-game-btn:hover {
+    background: #3dd5b4;
+    transform: translateY(-2px);
+}
 
 
 /* Pagination bar*/

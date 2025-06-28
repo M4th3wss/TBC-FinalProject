@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ category.name }}{% endblock %}
+
+{% block content %}
+
+<h1 class="categories-text">{{ category.name|upper }}</h1>
+
+<div class="games-container">
+    {% for g in games %}
+    <div class="game-card">
+        {% if g.cover_image %}
+        <img src="{{ url_for('static', filename='covers/' ~ g.cover_image) }}" alt="{{ g.title }}" height="180">
+        {% endif %}
+        <h3>{{ g.title }}</h3>
+    </div>
+    {% else %}
+    <p>No games for this category yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

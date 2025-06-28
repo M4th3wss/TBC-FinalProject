@@ -1,34 +1,36 @@
-{%extends "base.html"%}
+{# templates/categories.html #}
+{% extends "base.html" %}
+{% block title %}Categories{% endblock %}
 
 {% block content %}
 
-<h1 class="categories-text"> Categories </h1>
+<h1 class="categories-text">Categories</h1>
 
 <div class="card-wrapper">
     <div class="card">
-        <p><span>RPG</span></p>
-        <p><span>SHOOTER</span></p>
-        <p><span>HORROR</span></p>
-        <p><span>ACTION</span></p>
-        <p><span>RACING</span></p>
-        <p><span>STRATEGY</span></p>
-
+        <p onclick="location.href='{{ url_for('main.category_page', slug='rpg') }}'"><span>RPG</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='shooter') }}'"><span>SHOOTER</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='horror') }}'"><span>HORROR</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='action') }}'"><span>ACTION</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='racing') }}'"><span>RACING</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='strategy') }}'"><span>STRATEGY</span></p>
     </div>
-
-
-
-
 </div>
 
-<div class="card-wrapper" style="height: 42vh;">
+<div class="card-wrapper">
     <div class="card card2">
-        <p><span>METROIDVANIA</span></p>
-        <p><span>SPORTS</span></p>
-        <p><span>ROGUE-LIKE</span></p>
-        <p><span>SIMULATION</span></p>
-        <p><span>SCI-FI</span></p>
-        <p><span>CASUAL</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='metroidvania') }}'"><span>METROIDVANIA</span>
+        </p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='sports') }}'"><span>SPORTS</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='rogue-like') }}'"><span>ROGUE-LIKE</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='simulation') }}'"><span>SIMULATION</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='sci-fi') }}'"><span>SCI-FI</span></p>
+        <p onclick="location.href='{{ url_for('main.category_page', slug='casual') }}'"><span>CASUAL</span></p>
     </div>
 </div>
+
+{% if current_user.is_authenticated and current_user.is_admin %}
+<a href="{{ url_for('main.add_game') }}" class="add-game-btn" title="Add Game">＋ Add Game</a>
+{% endif %}
 
 {% endblock %}

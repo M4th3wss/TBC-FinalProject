@@ -1,5 +1,5 @@
-from forms import RegistrationForm, LoginForm, EditProfileForm
-from models import User
+from forms import AddGameForm, RegistrationForm, LoginForm, EditProfileForm
+from models import Category, Game, User, admin_required
 from ext import db
 import os
 import json
@@ -69,10 +69,34 @@ def index():
 
 @bp.route("/categories")
 def categories():
-    return render_template("categories.html")
+    all_categories = Category.query.all()
+    categories = [
+        {"name": "RPG", "slug": "rpg"},
+        {"name": "SHOOTER", "slug": "shooter"},
+        {"name": "HORROR", "slug": "horror"},
+        {"name": "ACTION", "slug": "action"},
+        {"name": "RACING", "slug": "racing"},
+        {"name": "STRATEGY", "slug": "strategy"},
+        {"name": "METROIDVANIA", "slug": "metroidvania"},
+        {"name": "SPORTS", "slug": "sports"},
+        {"name": "ROGUE-LIKE", "slug": "rogue-like"},
+        {"name": "SIMULATION", "slug": "simulation"},
+        {"name": "SCI-FI", "slug": "sci-fi"},
+        {"name": "CASUAL", "slug": "casual"},
+    ]
+
+    for c in categories:
+        if not Category.query.filter_by(slug=c["slug"]).first():
+            db.session.add(Category(name=c["name"], slug=c["slug"]))
+    db.session.commit()
+    return render_template("categories.html", categories=all_categories)
+
+    # categories to add
 
 
 # ────────────────────────── AUTH ─────────────────────────────────
+
+
 @bp.route("/register", methods=["GET", "POST"])
 def register():
     if current_user.is_authenticated:
@@ -173,3 +197,49 @@ def save_avatar(storage):
     fname = secure_filename(storage.filename)
     storage.save(os.path.join(AVATAR_FOLDER, fname))
     return fname
+
+
+# ────────────────────────── ADDGAME ──────────────────────────────
+@bp.route("/admin/add_game", methods=["GET", "POST"])
+@admin_required
+def add_game():
+    form = AddGameForm()
+    form.category.choices = [
+        (c.id, c.name) for c in Category.query.order_by(Category.name).all()
+    ]
+
+    if form.validate_on_submit():
+        # ფაილის შენახვა covers საქაღალდეში
+        filename = None
+        if form.cover.data:
+            filename = save_cover(form.cover.data)   # თავისი helper
+
+        # თამაში
+        game = Game(
+            title=form.title.data,
+            cover_image=filename,
+            category_id=form.category.data
+        )
+        db.session.add(game)
+        db.session.commit()
+        flash("თამაში დაემატა!", "success")
+        return redirect(url_for(".add_game"))
+
+    return render_template("admin_add_game.html", form=form)
+
+
+def save_cover(storage):
+    """ჩამოტვირთული თამაშის ყდის სურათი ინახავს static/covers/ საქაღალდეში
+       და აბრუნებს მხოლოდ ფაილის სახელს (fname)."""
+    folder = os.path.join("static", "covers")
+    os.makedirs(folder, exist_ok=True)          # თუ არ არსებობს - შექმნა
+    fname = secure_filename(storage.filename)   # Unsafe სახელის გასაწმენდად
+    storage.save(os.path.join(folder, fname))   # რეალურად ვწერთ დისკზე
+    return fname
+
+
+@bp.route("/category/<slug>")
+def category_page(slug):
+    category = Category.query.filter_by(slug=slug).first_or_404()
+    games = Game.query.filter_by(category=category).all()
+    return render_template("category.html", category=category, games=games)

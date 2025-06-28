@@ -1,7 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, FileField
+from flask_wtf.file import FileAllowed, FileRequired
 from wtforms.validators import DataRequired, Email, EqualTo, Length
-from wtforms import TextAreaField
+from wtforms import TextAreaField, StringField, SubmitField, SelectField, FileField
 
 
 class EditProfileForm(FlaskForm):
@@ -30,3 +31,11 @@ class LoginForm(FlaskForm):
     email = StringField("Email",     validators=[DataRequired(), Email()])
     password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Login")
+
+
+class AddGameForm(FlaskForm):
+    title = StringField("Title", validators=[DataRequired()])
+    cover = FileField("Cover (jpg/png)",
+                      validators=[FileAllowed(['jpg', 'png', 'jpeg'])])
+    category = SelectField("Category", coerce=int)   # dropdown
+    submit = SubmitField("Add")
