@@ -932,21 +932,22 @@ li a:hover {
 
     position: fixed;
     bottom: 32px;
-    left: 32px;
-    padding: 10px 18px;
+    right: 32px;
+    background: var(--clr-glass);
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid var(--clr-glass-border);
+    color: var(--clr-text);
     font-size: 14px;
-    font-weight: 600;
-    background: #5ef6d5;
-    color: #0e101a;
-    border-radius: 8px;
+    padding: 10px 16px;
+    border-radius: var(--radius);
     text-decoration: none;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .35);
-    transition: background .25s, transform .2s;
+    transition: var(--transition);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 .add-game-btn:hover {
-    background: #3dd5b4;
-    transform: translateY(-2px);
+    background: var(--clr-primary);
+    color: var(--clr-bg);
 }
 
 
@@ -1543,4 +1544,103 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+:root {
+    --clr-card-bg: rgba(255, 255, 255, 0.04);
+    --clr-card-border: rgba(255, 255, 255, 0.12);
+    --clr-accent: #5ef6d5;
+    --radius: 14px;
+    --time: .35s cubic-bezier(.4, 0, .2, 1);
+}
+
+/* ─── თემის სათაური ─── */
+.categories-text {
+    font-family: "Manrope", sans-serif;
+    text-align: center;
+    font-size: clamp(26px, 4vw, 34px);
+    margin: 34px 0 28px;
+    color: #eee;
+}
+
+/* ─── Grid wrapper ─── */
+.games-grid {
+    --min: 180px;
+    /* card min width */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
+    gap: 22px;
+    padding: 0 max(6vw, 40px) 60px;
+}
+
+/* ─── Card ─── */
+.game-card {
+    background: var(--clr-card-bg);
+    border: 1px solid var(--clr-card-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    backdrop-filter: blur(16px);
+    transition: transform var(--time), box-shadow var(--time);
+    display: flex;
+    flex-direction: column;
+}
+
+.game-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, .55);
+}
+
+/* ─── Cover ─── */
+.game-card__img,
+.game-card__placeholder {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    background: #24252f;
+}
+
+/* ─── Placeholder text ─── */
+.game-card__placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+}
+
+/* ─── Title ─── */
+.game-card__title {
+    margin: 14px 16px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #eee;
+    flex: 1 0 auto;
+}
+
+/* ─── Responsive tweak ─── */
+@media(max-width:500px) {
+    .games-grid {
+        --min: 140px;
+        gap: 16px;
+    }
+
+    .game-card__img {
+        height: 140px;
+    }
+
+    .game-card__title {
+        font-size: 15px;
+        margin: 10px 12px;
+    }
+}
+
+/* ─── Empty message ─── */
+.no-games {
+    width: 100%;
+    text-align: center;
+    margin: 60px 0;
+    color: #888;
+    font-style: italic;
 }

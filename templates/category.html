@@ -2,20 +2,22 @@
 {% block title %}{{ category.name }}{% endblock %}
 
 {% block content %}
-
 <h1 class="categories-text">{{ category.name|upper }}</h1>
 
-<div class="games-container">
+<div class="games-grid">
     {% for g in games %}
-    <div class="game-card">
+    <article class="game-card">
         {% if g.cover_image %}
-        <img src="{{ url_for('static', filename='covers/' ~ g.cover_image) }}" alt="{{ g.title }}" height="180">
+        <img src="{{ url_for('static', filename='covers/' ~ g.cover_image) }}" alt="{{ g.title }}"
+            class="game-card__img" loading="lazy">
+        {% else %}
+        <div class="game-card__placeholder">No Cover</div>
         {% endif %}
-        <h3>{{ g.title }}</h3>
-    </div>
+
+        <h3 class="game-card__title">{{ g.title }}</h3>
+    </article>
     {% else %}
-    <p>No games for this category yet.</p>
+    <p class="no-games">No games for this category yet.</p>
     {% endfor %}
 </div>
-
 {% endblock %}
