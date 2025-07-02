@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="game-detail" style="background-image: url('{{ url_for('static', filename=game.background_image) }}');">
+    <h1>{{ game.title }}</h1>
+    <p>{{ game.description }}</p>
+    <a href="{{ url_for('static', filename=game.torrent_file) }}" download>Download Torrent</a>
+</div>
+{% endblock %}

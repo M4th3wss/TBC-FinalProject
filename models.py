@@ -42,11 +42,15 @@ class Category(db.Model):
 
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120), nullable=False)
-    cover_image = db.Column(db.String(120))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    category = db.relationship('Category')
-    background_image = db.Column(db.String(120))
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(250), nullable=False)
+    cover = db.Column(db.String(120), nullable=False)
+    background_image = db.Column(db.String(120), nullable=False)
+    torrent_file = db.Column(db.String(120), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(
+        'category.id'), nullable=False)
+    category = db.relationship(
+        'Category', backref=db.backref('games', lazy=True))
 
 
 # ─────────────────── LOGIN ───────────────────

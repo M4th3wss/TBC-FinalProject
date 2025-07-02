@@ -6,16 +6,17 @@
 
 <div class="games-grid">
     {% for g in games %}
-    <article class="game-card2">
-        {% if g.cover_image %}
-        <img src="{{ url_for('static', filename='covers/' ~ g.cover_image) }}" alt="{{ g.title }}"
-            class="game-card__img" loading="lazy">
-        {% else %}
-        <div class="game-card__placeholder">No Cover</div>
-        {% endif %}
-
-        <h3 style="margin-left: 5px;" class="game-card__title">{{ g.title }}</h3>
-    </article>
+    <a href="{{ url_for('main.game_detail', game_id=g.id) }}" style="text-decoration:none;">
+        <article class="game-card2">
+            {% if g.cover %}
+            <img src="{{ url_for('static', filename=g.cover) }}" alt="{{ g.title }}" class="game-card__img"
+                loading="lazy">
+            {% else %}
+            <div class="game-card__placeholder">No Cover</div>
+            {% endif %}
+            <h3 style="margin-left: 5px;" class="game-card__title">{{ g.title }}</h3>
+        </article>
+    </a>
     {% else %}
     <p class="no-games">No games for this category yet.</p>
     {% endfor %}

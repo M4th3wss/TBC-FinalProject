@@ -3,7 +3,7 @@ from models import Category, Game, User, admin_required
 from ext import db
 import os
 import json
-from flask import Blueprint, render_template, redirect, url_for, flash, request
+from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
 from flask_login import (
     login_user, login_required, logout_user, current_user
 )
@@ -89,12 +89,8 @@ def categories():
         if not Category.query.filter_by(slug=c["slug"]).first():
             db.session.add(Category(name=c["name"], slug=c["slug"]))
     db.session.commit()
+    all_categories = Category.query.all()
     return render_template("categories.html", categories=all_categories)
-
-    # categories to add
-
-
-# ────────────────────────── AUTH ─────────────────────────────────
 
 
 @bp.route("/register", methods=["GET", "POST"])
@@ -115,7 +111,6 @@ def register():
         user.set_password(form.password.data)
         user.banner = save_banner(form.banner.data)
         user.games = json.dumps(["Hollow Knight"])
-        user.games = json.dumps(["Elder Ring: Nightreign"])
 
         db.session.add(user)
         db.session.commit()
@@ -138,6 +133,8 @@ def login():
             flash("Logged in!", "success")
             return redirect(url_for(".profile"))
         flash("Უწორი მონაცემები.", "danger")
+    else:
+        print(form.errors)
     return render_template("login.html", form=form)
 
 
@@ -204,20 +201,40 @@ def save_avatar(storage):
 @admin_required
 def add_game():
     form = AddGameForm()
-    form.category.choices = [
-        (c.id, c.name) for c in Category.query.order_by(Category.name).all()
-    ]
+    # Populate category choices
+    form.category.choices = [(c.id, c.name)
+                             for c in Category.query.order_by(Category.name).all()]
 
     if form.validate_on_submit():
-        # ფაილის შენახვა covers საქაღალდეში
-        filename = None
-        if form.cover.data:
-            filename = save_cover(form.cover.data)   # თავისი helper
+        # Save files
+        cover_filename = secure_filename(form.cover.data.filename)
+        background_filename = secure_filename(
+            form.background_image.data.filename)
+        torrent_filename = secure_filename(form.torrent_file.data.filename)
 
-        # თამაში
+        cover_path = os.path.join(
+            current_app.root_path, 'static/covers', cover_filename)
+        background_path = os.path.join(
+            current_app.root_path, 'static/banners', background_filename)
+        torrent_path = os.path.join(
+            current_app.root_path, 'static/torrents', torrent_filename)
+
+        # Ensure directories exist
+        os.makedirs(os.path.dirname(cover_path), exist_ok=True)
+        os.makedirs(os.path.dirname(background_path), exist_ok=True)
+        os.makedirs(os.path.dirname(torrent_path), exist_ok=True)
+
+        form.cover.data.save(cover_path)
+        form.background_image.data.save(background_path)
+        form.torrent_file.data.save(torrent_path)
+
+        # Create game instance
         game = Game(
             title=form.title.data,
-            cover_image=filename,
+            description=form.description.data,
+            cover='covers/' + cover_filename,
+            background_image='banners/' + background_filename,
+            torrent_file='torrents/' + torrent_filename,
             category_id=form.category.data
         )
         db.session.add(game)
@@ -240,6 +257,15 @@ def save_cover(storage):
 
 @bp.route("/category/<slug>")
 def category_page(slug):
+    print("Slug:", slug)
     category = Category.query.filter_by(slug=slug).first_or_404()
+    print("Category:", category)
     games = Game.query.filter_by(category=category).all()
+    print("Games:", games)
     return render_template("category.html", category=category, games=games)
+
+
+@bp.route('/game/<int:game_id>')
+def game_detail(game_id):
+    game = Game.query.get_or_404(game_id)
+    return render_template('game.html', game=game)

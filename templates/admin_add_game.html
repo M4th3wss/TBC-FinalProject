@@ -16,9 +16,20 @@
             {{ form.category(class="input", style="margin-top:6px; width:100%;") }}
         </label><br><br>
 
+        <label>აღწერა
+            {{ form.description(class="input", style="margin-top:6px; width:100%;") }}
+        </label><br><br>
         <label>ყდის სურათი
             {{ form.cover() }}<br><br>
         </label><br><br>
+
+        <label>უკანაფონის სურათი
+            {{ form.background_image() }}<br><br>
+        </label><br><br>
+
+        <label>ტორენტის ფაილი
+            {{form.torrent_file()}}<br><br>
+        </label>
 
 
 

@@ -1571,7 +1571,8 @@ body {
 .games-grid {
     --min: 180px;
     /* card min width */
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: repeat(auto-fill, minmax(var(--min), 1fr));
     gap: 22px;
     padding: 0 max(6vw, 40px) 60px;
@@ -1588,6 +1589,10 @@ body {
     transition: transform var(--time), box-shadow var(--time);
     display: flex;
     flex-direction: column;
+    flex: 1 1 22%;
+    min-width: 200px;
+    max-width: 250px;
+    box-sizing: border-box;
 }
 
 .game-card2:hover {
@@ -1626,7 +1631,7 @@ body {
 /* ─── Responsive tweak ─── */
 @media(max-width:500px) {
     .games-grid {
-        --min: 140px;
+        --min: 120px;
         gap: 16px;
     }
 

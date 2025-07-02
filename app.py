@@ -7,7 +7,9 @@ def create_app():
     app = Flask(__name__)
     app.config.update(
         SECRET_KEY="replace-with-random-string",
+
         SQLALCHEMY_DATABASE_URI="sqlite:///site.db",
+
         MAX_CONTENT_LENGTH=3 * 1024 * 1024
     )
 
