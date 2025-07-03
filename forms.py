@@ -36,6 +36,8 @@ class AddGameForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     description = StringField("Description", validators=[
                               DataRequired(), Length(max=250)])
+    publisher = StringField("Publisher", validators=[DataRequired()])
+    release_date = StringField("Release Date", validators=[DataRequired()])
     cover = FileField(
         "Cover (jpg/png)", validators=[FileRequired(), FileAllowed(['jpg', 'png', 'jpeg'])])
     background_image = FileField("Background Image", validators=[

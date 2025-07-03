@@ -5,7 +5,13 @@
         style="background-image: url('{{ url_for('static', filename=game.background_image) }}');"></div>
     <div class="game-detail-info">
         <h1 class="game2-title">{{ game.title }}</h1>
-        <p class="game-description">{{ game.description }}</p>
+        <p class="game-description"> {{ game.description }}</p>
+        <p style="color: rgba(82, 99, 109, 0.719); margin-top: 30px; font-size: 17px;" class="game-description">
+            Publisher: {{ game.publisher }}</p>
+        <p style="color: rgba(76, 89, 97, 0.719); font-size: 17px;" class="game-description">Release date: {{
+            game.release_date }}</p>
+
+
         <div class="torrent-link-wrapper">
             <a class="torrent-link" href="{{ url_for('static', filename=game.torrent_file) }}" download>⬇ Download
                 Torrent</a>

@@ -232,6 +232,8 @@ def add_game():
         game = Game(
             title=form.title.data,
             description=form.description.data,
+            publisher=form.publisher.data,
+            release_date=form.release_date.data,
             cover='covers/' + cover_filename,
             background_image='banners/' + background_filename,
             torrent_file='torrents/' + torrent_filename,

@@ -44,6 +44,9 @@ class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     description = db.Column(db.String(250), nullable=False)
+    publisher = db.Column(db.String(250), nullable=False)
+    release_date = db.Column(db.String(250), nullable=False)
+
     cover = db.Column(db.String(120), nullable=False)
     background_image = db.Column(db.String(120), nullable=False)
     torrent_file = db.Column(db.String(120), nullable=False)
