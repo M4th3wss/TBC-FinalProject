@@ -1322,7 +1322,7 @@ body {
 
 /* ==========  WRAPPER  ========== */
 .profile {
-    max-width: 1550px;
+    max-width: auto;
     margin: 40px auto;
 }
 
@@ -1622,9 +1622,10 @@ body {
 /* ─── Title ─── */
 .game-card2__title {
     margin: 14px 16px;
+    font-family: "Manrope", sans-serif;
     font-size: 17px;
     font-weight: 600;
-    color: #eee;
+    color: #ffffff;
     flex: 1 0 auto;
 }
 
@@ -1655,4 +1656,100 @@ body {
     margin: 60px 0;
     color: #888;
     font-style: italic;
+}
+
+
+
+.game-detail-container {
+    max-width: auto;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.profile__banner {}
+
+.game-detail-bg {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 320px;
+    object-fit: cover;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
+}
+
+
+/* subtle dark-to-transparent overlay */
+.game-detail-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(14, 16, 26, 0) 40%,
+            rgba(14, 16, 26, 0.75) 100%);
+}
+
+.game-detail-bg--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #202334;
+    font-size: 18px;
+    color: var(--clr-sub);
+
+}
+
+
+.game-detail-info {
+    padding: 32px 32px 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background: #202334;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.45);
+    margin-bottom: 10px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+}
+
+.game2-title {
+    margin: 0;
+    font-size: 2.2rem;
+    color: #fff;
+    font-family: "Manrope", sans-serif;
+
+    font-weight: 700;
+    text-align: left;
+}
+
+.game-description {
+    color: #ccc;
+    font-size: 1.1rem;
+    text-align: left;
+    margin: 0;
+}
+
+.torrent-link-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.torrent-link {
+    margin-top: 100px;
+    background: #4e8cff;
+    color: #fff;
+    padding: 12px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+
+.torrent-link:hover {
+    background: #2563eb;
 }

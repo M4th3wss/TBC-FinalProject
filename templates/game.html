@@ -1,8 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="game-detail" style="background-image: url('{{ url_for('static', filename=game.background_image) }}');">
-    <h1>{{ game.title }}</h1>
-    <p>{{ game.description }}</p>
-    <a href="{{ url_for('static', filename=game.torrent_file) }}" download>Download Torrent</a>
+<div class="game-detail-container">
+    <div class="game-detail-bg"
+        style="background-image: url('{{ url_for('static', filename=game.background_image) }}');"></div>
+    <div class="game-detail-info">
+        <h1 class="game2-title">{{ game.title }}</h1>
+        <p class="game-description">{{ game.description }}</p>
+        <div class="torrent-link-wrapper">
+            <a class="torrent-link" href="{{ url_for('static', filename=game.torrent_file) }}" download>⬇ Download
+                Torrent</a>
+        </div>
+    </div>
 </div>
 {% endblock %}
