@@ -11,7 +11,7 @@
 </div>
 
 <!-- …inside your .conteiner -->
-<div class="slider">
+<div class="slider slider-new">
     <!-- left arrow -->
     <label class="arrow arrow–prev">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
@@ -26,10 +26,8 @@
 
     <div class="NGContainer">
         {% for game in new_games %}
-        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
+        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
             <div class="game-title">{{ game.title }}</div>
-
-
         </div>
         {% endfor %}
     </div>
@@ -67,7 +65,7 @@
 </div>
 
 
-<div class="slider">
+<div class="slider slider-recommended">
     <!-- left arrow -->
     <label class="arrow arrow–prev">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
@@ -83,7 +81,7 @@
     <!-- your center container -->
     <div class="NGContainer">
         {% for game in recommended_games %}
-        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.image) }}');">
+        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
             <div class="game-title">{{ game.title }}</div>
         </div>
         {% endfor %}
@@ -112,64 +110,21 @@
 </div>
 
 
-<div style="margin-top: 50px;" class="new-added-label manrope-text">
-    Browse by Category
-</div>
-
-<div class="slider">
-    <!-- left arrow -->
-    <label class="arrow arrow–prev">
-        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-            </path>
-        </svg>
-    </label>
 
 
 
-    <div class="genre-container">
-        {% for genre in genre_type [:4] %}
-        <div>
-            <div class="genre" style="background-image: url('{{ url_for('static', filename=genre.image) }}');">
-                <div class="genre-title">{{ genre.title }}</div>
-            </div>
-        </div>
 
-        {% endfor %}
-    </div>
-    <!-- right arrow -->
-    <label class="arrow arrow–next">
-        <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
-            <path d="M310.6 233.4c12.5 12.5 12.5 32.8
-           0 45.3l-192 192c-12.5 12.5-32.8
-           12.5-45.3 0s-12.5-32.8 0-45.3L242.7 
-           256 73.4 86.6c-12.5-12.5-12.5-32.8 
-           0-45.3s32.8-12.5 45.3 0l192 192z">
-            </path>
-        </svg>
-    </label>
-</div>
-
-<div class="progress-bar">
-
-    <span class="dot"></span>
-    <span class="dot active"></span>
-    <span class="dot"></span>
-    <span class="dot"></span>
-
-
-
-</div>
 
 
 
 <h1 style="margin-top: 100px;" class="categories-text"> All Games </h1>
 <div class="slider">
     <div class="allgames-container">
+        {% for game in all_games %}
+        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
+            <div class="game-title">{{ game.title }}</div>
+        </div>
+        {% endfor %}
 
 
         <div class="pagination-wrapper">

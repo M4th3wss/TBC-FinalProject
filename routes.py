@@ -8,6 +8,7 @@ from flask_login import (
     login_user, login_required, logout_user, current_user
 )
 from werkzeug.utils import secure_filename
+import random
 AVATAR_FOLDER = os.path.join("static", "avatars")
 
 
@@ -40,17 +41,12 @@ def save_banner(storage):
 # ────────────────────────── PUBLIC PAGES ─────────────────────────
 @bp.route("/")
 def index():
-    games_new = [
-        {"title": "Elder Ring: Nightreign", "image": "images/cover1.jpg"},
-        {"title": "Elder Scrolls IV: Oblivion (remastered)",
-         "image": "images/cover2.png"},
-        {"title": "Schedule I", "image": "images/cover3.jpg"},
-    ]
-    games_recommended = [
-        {"title": "Hollow Knight", "image": "images/cover4normal.png"},
-        {"title": "Deltarune", "image": "images/cover5.png"},
-        {"title": "Outer Wilds", "image": "images/cover6.png"},
-    ]
+    all_games = Game.query.all()
+    # Show the latest 5 games as "new added"
+    new_games = Game.query.order_by(Game.id.desc()).limit(5).all()
+    # Pick 5 random games for recommended (or fewer if not enough)
+    recommended_games = random.sample(all_games, min(5, len(all_games)))
+
     genres = [
         {"title": "RPG", "image": "images/rpg-game.png"},
         {"title": "ACTION", "image": "images/action-movie.png"},
@@ -61,8 +57,9 @@ def index():
     ]
     return render_template(
         "index.html",
-        new_games=games_new,
-        recommended_games=games_recommended,
+        new_games=new_games,
+        recommended_games=recommended_games,
+        all_games=all_games,
         genre_type=genres
     )
 
