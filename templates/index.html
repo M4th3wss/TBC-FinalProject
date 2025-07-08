@@ -121,8 +121,8 @@
 <div class="slider">
     <div class="allgames-container">
         {% for game in all_games %}
-        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
-            <div class="game-title">{{ game.title }}</div>
+        <div class="all-games-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
+            <div class="all-games-card-title">{{ game.title }}</div>
         </div>
         {% endfor %}
 

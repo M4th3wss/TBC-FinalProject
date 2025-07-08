@@ -10,7 +10,7 @@ def create_app():
 
         SQLALCHEMY_DATABASE_URI="sqlite:///site.db",
 
-        MAX_CONTENT_LENGTH=3 * 1024 * 1024
+        MAX_CONTENT_LENGTH=20 * 1024 * 1024
     )
 
     # ───── Extensions

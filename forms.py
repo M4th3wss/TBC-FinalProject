@@ -35,7 +35,7 @@ class LoginForm(FlaskForm):
 class AddGameForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     description = StringField("Description", validators=[
-                              DataRequired(), Length(max=250)])
+                              DataRequired(), ])
     publisher = StringField("Publisher", validators=[DataRequired()])
     release_date = StringField("Release Date", validators=[DataRequired()])
     cover = FileField(
