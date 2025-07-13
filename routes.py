@@ -43,9 +43,9 @@ def save_banner(storage):
 def index():
     all_games = Game.query.all()
     # Show the latest 5 games as "new added"
-    new_games = Game.query.order_by(Game.id.desc()).limit(5).all()
+    new_games = Game.query.order_by(Game.id.desc()).limit(3).all()
     # Pick 5 random games for recommended (or fewer if not enough)
-    recommended_games = random.sample(all_games, min(5, len(all_games)))
+    recommended_games = random.sample(all_games, min(3, len(all_games)))
 
     genres = [
         {"title": "RPG", "image": "images/rpg-game.png"},
@@ -143,6 +143,16 @@ def logout():
     return redirect(url_for(".index"))
 
 
+@bp.route("/request", methods=["GET", "POST"])
+def request():
+    return render_template("request.html")
+
+
+@bp.route("/contact")
+def contact():
+    return render_template("contact.html")
+
+
 # ────────────────────────── PROFILE ──────────────────────────────
 @bp.route("/profile")
 @login_required
@@ -175,7 +185,6 @@ def edit_profile():
                 current_user.banner = fname
 
         db.session.commit()
-        flash("Profile updated ✨", "success")
         return redirect(url_for(".profile"))
     return render_template("edit_profile.html", form=form, user=current_user)
 

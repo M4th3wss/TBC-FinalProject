@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Request{% endblock %}
+
+{% block content %}
+<div class="request-container">
+    <h1>Request a Game</h1>
+    <p>მოითხოვე სასურველი თამაში</p>
+    <form action="/request" method="post">
+        <input type="text" name="game_name" placeholder="Game Name">
+        <input type="submit" value="Request">
+    </form>
+</div>
+{% endblock %}

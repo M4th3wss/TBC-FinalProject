@@ -1,3 +1,4 @@
+from flask_migrate import Migrate
 from flask import Flask, render_template
 from ext import db, login_manager, csrf
 from routes import bp
@@ -15,10 +16,7 @@ def create_app():
 
     # ───── Extensions
     db.init_app(app)
-    from flask_migrate import Migrate
-
     migrate = Migrate(app, db)
-
     login_manager.init_app(app)
     csrf.init_app(app)
 
