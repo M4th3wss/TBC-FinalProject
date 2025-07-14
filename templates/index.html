@@ -13,7 +13,7 @@
 <!-- …inside your .conteiner -->
 <div class="slider slider-new">
     <!-- left arrow -->
-    <label class="arrow arrow–prev">
+    <label class="arrow arrow--prev">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
@@ -26,15 +26,16 @@
 
     <div class="NGContainer">
         {% for game in new_games %}
-        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
+        <a href="{{ url_for('main.game_detail', game_id=game.id) }}" class="game-card"
+            style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
             <div class="game-title">{{ game.title }}</div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
 
     <!-- right arrow -->
-    <label class="arrow arrow–next">
+    <label class="arrow arrow--next">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
@@ -67,7 +68,7 @@
 
 <div class="slider slider-recommended">
     <!-- left arrow -->
-    <label class="arrow arrow–prev">
+    <label class="arrow arrow--prev">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
@@ -81,14 +82,15 @@
     <!-- your center container -->
     <div class="NGContainer">
         {% for game in recommended_games %}
-        <div class="game-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
+        <a href="{{ url_for('main.game_detail', game_id=game.id) }}" class="game-card"
+            style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
             <div class="game-title">{{ game.title }}</div>
-        </div>
+        </a>
         {% endfor %}
     </div>
 
     <!-- right arrow -->
-    <label class="arrow arrow–next">
+    <label class="arrow arrow--next">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
            0 45.3l-192 192c-12.5 12.5-32.8
@@ -121,9 +123,10 @@
 <div class="slider">
     <div class="allgames-container">
         {% for game in all_games %}
-        <div class="all-games-card" style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
+        <a href="{{ url_for('main.game_detail', game_id=game.id) }}" class="all-games-card"
+            style="background-image: url('{{ url_for('static', filename=game.cover) }}');">
             <div class="all-games-card-title">{{ game.title }}</div>
-        </div>
+        </a>
         {% endfor %}
 
 

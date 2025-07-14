@@ -37,17 +37,25 @@ function setupSlider(sliderSelector, cardSelector, visibleCount = 3) {
         });
     }
 
-    slider.querySelector('.arrow--prev').onclick = function () {
-        if (start > 0) start--;
-        showCards();
-    };
-    slider.querySelector('.arrow--next').onclick = function () {
-        if (start < cards.length - visibleCount) start++;
-        showCards();
-    };
+    const prevArrow = slider.querySelector('.arrow--prev');
+    const nextArrow = slider.querySelector('.arrow--next');
+
+    if (prevArrow) {
+        prevArrow.onclick = function () {
+            if (start > 0) start--;
+            showCards();
+        };
+    }
+    if (nextArrow) {
+        nextArrow.onclick = function () {
+            if (start < cards.length - visibleCount) start++;
+            showCards();
+        };
+    }
 
     showCards();
 }
 
 setupSlider('.slider-new', '.game-card', 3);
 setupSlider('.slider-recommended', '.game-card', 3);
+setupSlider('.slider', '.all-games-card', 6); 
