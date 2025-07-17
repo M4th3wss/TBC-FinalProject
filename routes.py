@@ -107,7 +107,6 @@ def register():
         )
         user.set_password(form.password.data)
         user.banner = save_banner(form.banner.data)
-        user.games = json.dumps(["Hollow Knight"])
 
         db.session.add(user)
         db.session.commit()
