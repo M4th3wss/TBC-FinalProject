@@ -1,9 +1,9 @@
 from forms import AddGameForm, RegistrationForm, LoginForm, EditProfileForm
-from models import Category, Game, User, admin_required, GameRequest
+from models import Category, Game, User, admin_required
 from ext import db
 import os
 import json
-from flask import Blueprint, render_template, redirect, url_for, flash, request, current_app
+from flask import Blueprint, render_template, redirect, url_for, flash,  current_app
 from flask_login import (
     login_user, login_required, logout_user, current_user
 )
