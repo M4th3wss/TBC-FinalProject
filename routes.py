@@ -143,17 +143,9 @@ def logout():
     return redirect(url_for(".index"))
 
 
-@bp.route("/request", methods=["GET", "POST"])
+@bp.route("/request")
 def request():
-    if request.method == "POST":
-        game_name = request.form.get("game_name")
-        if game_name:
-            req = GameRequest(game_name=game_name)
-            db.session.add(req)
-            db.session.commit()
-            flash("Request submitted!", "success")
-        else:
-            flash("Please enter a game name.", "danger")
+
     return render_template("request.html")
 
 
