@@ -2,6 +2,7 @@ from flask_migrate import Migrate
 from flask import Flask, render_template
 from ext import db, login_manager, csrf
 from routes import bp
+import os
 
 
 def create_app():
@@ -22,6 +23,8 @@ def create_app():
 
     # ───── Blueprints
     app.register_blueprint(bp)
+
+    app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-key')
 
     return app
 

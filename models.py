@@ -70,3 +70,8 @@ def admin_required(f):
             return abort(403)
         return f(*args, **kwargs)
     return wrapper
+
+
+class GameRequest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    game_name = db.Column(db.String(120), nullable=False)
