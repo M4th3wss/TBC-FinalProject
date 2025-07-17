@@ -1,5 +1,5 @@
 from forms import AddGameForm, RegistrationForm, LoginForm, EditProfileForm
-from models import Category, Game, User, admin_required
+from models import Category, Game, User, admin_required, GameRequest
 from ext import db
 import os
 import json
@@ -145,6 +145,15 @@ def logout():
 
 @bp.route("/request", methods=["GET", "POST"])
 def request():
+    if request.method == "POST":
+        game_name = request.form.get("game_name")
+        if game_name:
+            req = GameRequest(game_name=game_name)
+            db.session.add(req)
+            db.session.commit()
+            flash("Request submitted!", "success")
+        else:
+            flash("Please enter a game name.", "danger")
     return render_template("request.html")
 
 
@@ -277,3 +286,13 @@ def category_page(slug):
 def game_detail(game_id):
     game = Game.query.get_or_404(game_id)
     return render_template('game.html', game=game)
+
+
+@bp.route('/game/<int:game_id>/delete', methods=['POST'])
+@admin_required
+def delete_game(game_id):
+    game = Game.query.get_or_404(game_id)
+    db.session.delete(game)
+    db.session.commit()
+    flash("Game deleted.", "success")
+    return redirect(url_for('main.index'))

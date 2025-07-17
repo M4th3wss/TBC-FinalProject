@@ -37,19 +37,7 @@
 
 
     <!-- ────── Games list ────── -->
-    <section class="profile__games">
-        <h3 class="profile__subtitle">ჩემი ჩამოტვირთული თამაშები</h3>
 
-        {% if user.games_list() %}
-        <ul class="profile__gamelist">
-            {% for g in user.games_list() %}
-            <li class="profile__game">{{ g }}</li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p class="profile__empty">ჯერ არაფერია ჩამოტვირთული.</p>
-        {% endif %}
-    </section>
 
 
     <a href="{{ url_for('main.logout') }}" class="profile__logout">
