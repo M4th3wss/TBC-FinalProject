@@ -142,7 +142,7 @@ def logout():
     return redirect(url_for(".index"))
 
 
-@bp.route("/request", methods=["GET", "POST"])
+@bp.route("/request")
 def request_game():
 
     return render_template("request.html")
