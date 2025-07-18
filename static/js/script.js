@@ -58,4 +58,4 @@ function setupSlider(sliderSelector, cardSelector, visibleCount = 3) {
 
 setupSlider('.slider-new', '.game-card', 3);
 setupSlider('.slider-recommended', '.game-card', 3);
-setupSlider('.slider', '.all-games-card', 6); 
+setupSlider('.slider', '.all-games-card', 5); 
