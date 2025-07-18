@@ -2207,5 +2207,5 @@ body {
 .categories-text,
 .game-card2__title,
 .game-title {
-    font-size: clamp(8px, 1vw, 30px);
+    font-size: clamp(20px, 1vw, 30px);
 }
