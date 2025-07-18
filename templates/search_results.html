@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Search: {{ query }}{% endblock %}
+
+{% block content %}
+<h1 class="categories-text">Search: {{ query|e }}</h1>
+
+<div class="games-grid">
+    {% for g in games %}
+    <a href="{{ url_for('main.game_detail', game_id=g.id) }}" style="text-decoration:none;">
+        <article class="game-card2">
+            {% if g.cover %}
+            <img src="{{ url_for('static', filename=g.cover) }}" alt="{{ g.title }}" class="game-card__img"
+                loading="lazy">
+            {% else %}
+            <div class="game-card__placeholder">No Cover</div>
+            {% endif %}
+            <h3 style="margin-left: 5px;" class="game-card2__title">{{ g.title }}</h3>
+        </article>
+    </a>
+    {% else %}
+    <p class="no-games">No games found for this search.</p>
+    {% endfor %}
+</div>
+{% endblock %}

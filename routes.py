@@ -3,7 +3,7 @@ from models import Category, Game, User, admin_required
 from ext import db
 import os
 import json
-from flask import Blueprint, render_template, redirect, url_for, flash,  current_app
+from flask import Blueprint, render_template, redirect, url_for, flash,  current_app, request
 from flask_login import (
     login_user, login_required, logout_user, current_user
 )
@@ -142,8 +142,8 @@ def logout():
     return redirect(url_for(".index"))
 
 
-@bp.route("/request")
-def request():
+@bp.route("/request", methods=["GET", "POST"])
+def request_game():
 
     return render_template("request.html")
 
@@ -287,3 +287,12 @@ def delete_game(game_id):
     db.session.commit()
     flash("Game deleted.", "success")
     return redirect(url_for('main.index'))
+
+
+@bp.route('/search')
+def search():
+    query = request.args.get('q', '').strip()
+    games = []
+    if query:
+        games = Game.query.filter(Game.title.ilike(f'%{query}%')).all()
+    return render_template('search_results.html', games=games, query=query)

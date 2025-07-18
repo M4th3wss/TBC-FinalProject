@@ -400,18 +400,18 @@ li a:hover {
 .auth-container {
     display: flex;
     gap: 10px;
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: rgba(255, 255, 255, 0);
     padding: 8px 16px;
     border-radius: 10px;
-    margin-left: 150px;
-    margin-right: 60px;
+
+    margin-right: 240px;
 }
 
 .auth-container a {
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 12px;
+    font-size: 13px;
     font-family: "Noto Sans Georgian", sans-serif;
 
     padding: 8px 12px;
@@ -420,7 +420,7 @@ li a:hover {
 }
 
 .auth-container a:hover {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .conteiner {
@@ -459,13 +459,7 @@ li a:hover {
     opacity: .8;
 }
 
-.search-icon {
-    width: 21px;
-    height: 21px;
-    position: absolute;
-    top: 7px;
-    right: 15px;
-}
+
 
 .slider {
     display: flex;
@@ -490,15 +484,15 @@ li a:hover {
     flex-shrink: 0;
 }
 
-.arrow–prev svg {
+.arrow--prev svg {
     transform: rotate(180deg);
 }
 
-.arrow–prev {
+.arrow--prev {
     margin-right: 10px;
 }
 
-.arrow–next {
+.arrow--next {
     margin-left: 10px;
 }
 
@@ -1578,11 +1572,9 @@ body {
 
 /* --- Avatar button --- */
 .nav-avatar {
-    display: inline-block;
-    width: 44px;
-    height: 44px;
     border-radius: 50%;
     overflow: hidden;
+    display: inline-block;
 }
 
 
@@ -1591,6 +1583,25 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.navbar-avatar {
+    width: 44px;
+    height: 44px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #4e8cff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    transition: box-shadow 0.2s, border-color 0.2s;
+    display: block;
+}
+
+.navbar-avatar:hover,
+.navbar-avatar:focus,
+.navbar-avatar:active {
+    box-shadow: 0 4px 16px rgba(78, 140, 255, 0.25);
+    border-color: #2563eb;
+    outline: none;
 }
 
 
@@ -1940,4 +1951,258 @@ body {
 .contact-social:hover {
     color: #2563eb;
     text-decoration: underline;
+}
+
+/* Modern navbar search bar */
+.navbar-search {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+    padding: 2px 8px 2px 16px;
+    z-index: 1100;
+}
+
+.navbar-search input[type="text"] {
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #fff;
+    font-size: 15px;
+    padding: 8px 0;
+    width: 160px;
+    transition: width 0.3s;
+}
+
+.navbar-search input[type="text"]::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+.navbar-search button {
+    background: #4e8cff;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    margin-left: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.10);
+}
+
+.navbar-search button:hover {
+    background: #2563eb;
+}
+
+@media (max-width: 700px) {
+    .navbar-search {
+        right: 12px;
+        top: 60px;
+        transform: none;
+        position: fixed;
+        width: 90vw;
+        max-width: 340px;
+        padding: 2px 8px 2px 12px;
+    }
+
+    .navbar-search input[type="text"] {
+        width: 100px;
+        font-size: 14px;
+    }
+}
+
+.profile__avatar,
+.avatar-img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Responsive improvements */
+
+@media (max-width: 1024px) {
+    .conteiner {
+        width: 90%;
+        min-height: 600px;
+        padding: 6px;
+    }
+
+    .games-grid {
+        padding: 0 10vw 40px;
+        gap: 14px;
+    }
+
+    .allgames-container {
+        width: 98vw;
+        max-width: 98vw;
+        height: auto;
+    }
+}
+
+@media (max-width: 700px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 0 10px;
+    }
+
+    .navbar-search {
+        right: 12px;
+        top: 60px;
+        transform: none;
+        position: fixed;
+        width: 90vw;
+        max-width: 340px;
+        padding: 2px 8px 2px 12px;
+    }
+
+    .navbar-search input[type="text"] {
+        width: 100px;
+        font-size: 14px;
+    }
+
+    .auth-container {
+        margin-right: 0;
+        margin-left: 0;
+        flex-direction: column;
+        align-items: flex-end;
+        padding: 8px 0;
+    }
+
+    .nav-avatar,
+    .navbar-avatar {
+        width: 36px;
+        height: 36px;
+    }
+
+    .categories-text {
+        font-size: 22px;
+    }
+
+    .game-card,
+    .all-games-card,
+    .game-card2 {
+        width: 90vw !important;
+        max-width: 98vw;
+        min-width: 0;
+        height: 180px !important;
+    }
+
+    .game-card__img,
+    .game-card2__img {
+        height: 100px;
+    }
+
+    .profile__banner {
+        width: 98vw;
+        height: 120px;
+    }
+
+    .profile__header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transform: translateY(-30px);
+    }
+
+    .profile__avatar {
+        width: 72px;
+        height: 72px;
+    }
+
+    .profile__games {
+        padding: 18px 8px 22px;
+    }
+
+    .container,
+    .conteiner {
+        width: 100vw;
+        min-width: 0;
+        padding: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .navbar-search {
+        top: 100px;
+        width: 96vw;
+        max-width: 96vw;
+    }
+
+    .navbar-search input[type="text"] {
+        width: 70px;
+        font-size: 13px;
+    }
+
+    .game-card,
+    .all-games-card,
+    .game-card2 {
+        height: 120px !important;
+    }
+
+    .game-card__img,
+    .game-card2__img {
+        height: 60px;
+    }
+
+    .categories-text {
+        font-size: 16px;
+    }
+
+    .profile__avatar,
+    .navbar-avatar {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+/* Ensure all avatars and images are circular and scale */
+.navbar-avatar,
+.profile__avatar,
+.avatar-img {
+    border-radius: 50%;
+    object-fit: cover;
+    max-width: 100%;
+    height: auto;
+}
+
+.nav-avatar {
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+}
+
+/* Make game cards flexible */
+.games-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    justify-content: center;
+}
+
+.game-card2,
+.game-card,
+.all-games-card {
+    flex: 1 1 220px;
+    min-width: 160px;
+    max-width: 280px;
+    box-sizing: border-box;
+}
+
+/* Responsive text */
+.categories-text,
+.game-card2__title,
+.game-title,
+.all-games-card-title {
+    font-size: clamp(14px, 3vw, 24px);
 }

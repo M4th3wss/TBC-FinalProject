@@ -27,27 +27,27 @@
 
             <ul>
                 <li><a href="/categories">კატეგორიები</a></li>
-                <li><a href="/request">მოთხოვნა</a></li>
+                <li><a href="/request_game">მოთხოვნა</a></li>
                 <li><a href="/contact">კონტაქტი</a></li>
             </ul>
 
             <div class="auth-container">
-                <div class="navlinks">
+                <div style="color: rgba(240, 248, 255, 0);" class="navlinks">
                     {% if not current_user.is_authenticated%}
                     <a href="{{ url_for('main.login') }}">შესვლა</a>
                     <a href="{{ url_for('main.register') }}">რეგისტრაცია</a>
                     {% else %}
                     <a href="{{ url_for('main.profile') }}" class="nav-avatar">
-                        {# avatar filename; თუკი მომავალში user.avatar დაამატებ, აქ შეცვლი #}
-                        <img src="{{ url_for('static', filename='images/profileimg.png') }}" alt="Profile"
-                            class="avatar-img">
+                        <img src="{% if current_user.avatar %}{{ url_for('static', filename='avatars/' ~ current_user.avatar) }}{% else %}{{ url_for('static', filename='images/profileimg.png') }}{% endif %}"
+                            alt="Profile" class="navbar-avatar">
                     </a>
                     {% endif %}
-
                 </div>
-
-
             </div>
+            <form action="{{ url_for('main.search') }}" method="get" class="navbar-search">
+                <input type="text" name="q" placeholder="Search games...">
+                <button type="submit">🔍</button>
+            </form>
         </div>
     </header>
 
