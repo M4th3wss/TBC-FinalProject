@@ -25,6 +25,7 @@ def create_app():
     app.register_blueprint(bp)
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-key')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///instance/site.db'
 
     return app
 
