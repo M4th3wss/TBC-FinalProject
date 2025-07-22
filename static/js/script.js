@@ -1,61 +1,60 @@
-var btns = document.querySelectorAll('.btn');
-var paginationWrapper = document.querySelector('.pagination-wrapper');
-var bigDotContainer = document.querySelector('.big-dot-container');
-var littleDot = document.querySelector('.little-dot');
+document.addEventListener('DOMContentLoaded', () => {
+    // ფუნქცია თითოეული slider-ზე ცალ-ცალკე
+    document.querySelectorAll('.slider').forEach(slider => {
+        const container = slider.querySelector('.NGContainer, .allgames-container');
+        const cards = container.querySelectorAll('.game-card, .all-games-card');
+        const prevArrow = slider.querySelector('.arrow--prev');
+        const nextArrow = slider.querySelector('.arrow--next');
 
-for (var i = 0; i < btns.length; i++) {
-    btns[i].addEventListener('click', btnClick);
-}
+        // რამდენი ბარათი გამოჩნდეს ერთდროულად
+        let visibleCount = 3;
+        if (slider.classList.contains('slider')) visibleCount = 5;
 
-function btnClick() {
-    if (this.classList.contains('btn--prev')) {
-        paginationWrapper.classList.add('transition-prev');
-    } else {
-        paginationWrapper.classList.add('transition-next');
-    }
+        let start = 0;
 
-    var timeout = setTimeout(cleanClasses, 500);
-}
+        function showCards() {
+            cards.forEach((card, index) => {
+                card.style.display = (index >= start && index < start + visibleCount) ? 'block' : 'none';
+            });
+        }
 
-function cleanClasses() {
-    if (paginationWrapper.classList.contains('transition-next')) {
-        paginationWrapper.classList.remove('transition-next')
-    } else if (paginationWrapper.classList.contains('transition-prev')) {
-        paginationWrapper.classList.remove('transition-prev')
-    }
-}
+        if (prevArrow) {
+            prevArrow.addEventListener('click', () => {
+                if (start > 0) {
+                    start--;
+                    showCards();
+                }
+            });
+        }
 
-function setupSlider(sliderSelector, cardSelector, visibleCount = 3) {
-    const slider = document.querySelector(sliderSelector);
-    if (!slider) return;
-    const cards = slider.querySelectorAll(cardSelector);
-    let start = 0;
+        if (nextArrow) {
+            nextArrow.addEventListener('click', () => {
+                if (start < cards.length - visibleCount) {
+                    start++;
+                    showCards();
+                }
+            });
+        }
 
-    function showCards() {
-        cards.forEach((card, i) => {
-            card.style.display = (i >= start && i < start + visibleCount) ? '' : 'none';
+        showCards(); // საწყისში გაჩვენოს
+    });
+
+    // პაგინაციის ისრებისთვის (All Games ბოლოში)
+    const btns = document.querySelectorAll('.btn');
+    const paginationWrapper = document.querySelector('.pagination-wrapper');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            if (btn.classList.contains('btn--prev')) {
+                paginationWrapper.classList.add('transition-prev');
+            } else {
+                paginationWrapper.classList.add('transition-next');
+            }
+
+            setTimeout(() => {
+                paginationWrapper.classList.remove('transition-next');
+                paginationWrapper.classList.remove('transition-prev');
+            }, 500);
         });
-    }
-
-    const prevArrow = slider.querySelector('.arrow--prev');
-    const nextArrow = slider.querySelector('.arrow--next');
-
-    if (prevArrow) {
-        prevArrow.onclick = function () {
-            if (start > 0) start--;
-            showCards();
-        };
-    }
-    if (nextArrow) {
-        nextArrow.onclick = function () {
-            if (start < cards.length - visibleCount) start++;
-            showCards();
-        };
-    }
-
-    showCards();
-}
-
-setupSlider('.slider-new', '.game-card', 3);
-setupSlider('.slider-recommended', '.game-card', 3);
-setupSlider('.slider', '.all-games-card', 5); 
+    });
+});
