@@ -8,20 +8,18 @@ import os
 def create_app():
     app = Flask(__name__)
     app.config.update(
-        SECRET_KEY="replace-with-random-string",
+        SECRET_KEY="123123",
 
         SQLALCHEMY_DATABASE_URI="sqlite:///site.db",
 
         MAX_CONTENT_LENGTH=20 * 1024 * 1024
     )
 
-    # ───── Extensions
     db.init_app(app)
     migrate = Migrate(app, db)
     login_manager.init_app(app)
     csrf.init_app(app)
 
-    # ───── Blueprints
     app.register_blueprint(bp)
 
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'default-key')
@@ -30,7 +28,6 @@ def create_app():
     return app
 
 
-# ───── CLI / python app.py ─────
 if __name__ == "__main__":
 
     app = create_app()

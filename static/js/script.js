@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ფუნქცია თითოეული slider-ზე ცალ-ცალკე
     document.querySelectorAll('.slider').forEach(slider => {
         const container = slider.querySelector('.NGContainer, .allgames-container');
         const cards = container.querySelectorAll('.game-card, .all-games-card');
         const prevArrow = slider.querySelector('.arrow--prev');
         const nextArrow = slider.querySelector('.arrow--next');
 
-        // რამდენი ბარათი გამოჩნდეს ერთდროულად
         let visibleCount = 3;
         if (slider.classList.contains('slider')) visibleCount = 5;
 

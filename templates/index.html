@@ -67,7 +67,6 @@
 
 
 <div class="slider slider-recommended">
-    <!-- left arrow -->
     <label class="arrow arrow--prev">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
@@ -79,7 +78,6 @@
         </svg>
     </label>
 
-    <!-- your center container -->
     <div class="NGContainer">
         {% for game in recommended_games %}
         <a href="{{ url_for('main.game_detail', game_id=game.id) }}" class="game-card"
@@ -89,7 +87,6 @@
         {% endfor %}
     </div>
 
-    <!-- right arrow -->
     <label class="arrow arrow--next">
         <svg viewBox="0 0 320 512" xmlns="http://www.w3.org/2000/svg">
             <path d="M310.6 233.4c12.5 12.5 12.5 32.8
@@ -154,5 +151,5 @@
     </div>
 
 </div>
-<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+<script src="../static/js/script.js"></script>
 {% endblock %}

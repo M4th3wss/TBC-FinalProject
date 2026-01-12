@@ -38,13 +38,10 @@ def save_banner(storage):
     return fname
 
 
-# ────────────────────────── PUBLIC PAGES ─────────────────────────
 @bp.route("/")
 def index():
     all_games = Game.query.all()
-    # Show the latest 5 games as "new added"
     new_games = Game.query.order_by(Game.id.desc()).limit(3).all()
-    # Pick 5 random games for recommended (or fewer if not enough)
     recommended_games = random.sample(all_games, min(3, len(all_games)))
 
     genres = [
@@ -168,17 +165,14 @@ def edit_profile():
         bio=getattr(current_user, "bio", "")
     )
     if form.validate_on_submit():
-        # --- username & bio ---
         current_user.username = form.username.data
         current_user.bio = form.bio.data
 
-        # --- avatar upload ---
         if form.avatar.data:
-            fname = save_avatar(form.avatar.data)   # იმავე helper-ს ვიყენებთ
+            fname = save_avatar(form.avatar.data)   # იმავე helper-ს ვიყენებ
             if fname:
                 current_user.avatar = fname
 
-        # --- banner upload ---
         if form.banner.data:
             fname = save_banner(form.banner.data)
             if fname:
@@ -202,7 +196,6 @@ def save_avatar(storage):
     return fname
 
 
-# ────────────────────────── ADDGAME ──────────────────────────────
 @bp.route("/admin/add_game", methods=["GET", "POST"])
 @admin_required
 def add_game():
@@ -225,7 +218,6 @@ def add_game():
         torrent_path = os.path.join(
             current_app.root_path, 'static/torrents', torrent_filename)
 
-        # Ensure directories exist
         os.makedirs(os.path.dirname(cover_path), exist_ok=True)
         os.makedirs(os.path.dirname(background_path), exist_ok=True)
         os.makedirs(os.path.dirname(torrent_path), exist_ok=True)
@@ -257,9 +249,9 @@ def save_cover(storage):
     """ჩამოტვირთული თამაშის ყდის სურათი ინახავს static/covers/ საქაღალდეში
        და აბრუნებს მხოლოდ ფაილის სახელს (fname)."""
     folder = os.path.join("static", "covers")
-    os.makedirs(folder, exist_ok=True)          # თუ არ არსებობს - შექმნა
-    fname = secure_filename(storage.filename)   # Unsafe სახელის გასაწმენდად
-    storage.save(os.path.join(folder, fname))   # რეალურად ვწერთ დისკზე
+    os.makedirs(folder, exist_ok=True)  # თუ არ არსებობს
+    fname = secure_filename(storage.filename)
+    storage.save(os.path.join(folder, fname))
     return fname
 
 
